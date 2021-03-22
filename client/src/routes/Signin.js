@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo2.svg";
+import axios from 'axios';
 
 const { Kakao } = window;
 
@@ -32,8 +33,17 @@ function Signin() {
         <p> 지금 회원가입하시면 </p>
         <p> 명함이 5초만에 뚝딱!</p>
       </div>
-      <button className="sign-btn" onClick={kakaoLoginClickHandler}></button>
-
+      <button className="sign-btn" onClick={() => {
+        fetch('http://localhost:3001/api/auth/kakao')
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+        });
+      }}></button>
+      
+      
       <Link to="/signin" className="sign-btn2">
         카카오 계정으로 <u>신규 가입하기</u>
       </Link>
