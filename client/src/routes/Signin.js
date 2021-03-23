@@ -14,13 +14,7 @@ function Signin() {
       scope: "profile, account_email, gender",
       success: function (authObj) {
         console.log(authObj); //토큰
-        fetch('/api/auth/oauth', {
-          method: 'POST',
-          headers: {
-          'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(authObj)
-          }).then(response => response.json());
+        
           
           
  
