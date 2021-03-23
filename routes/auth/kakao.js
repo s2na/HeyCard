@@ -37,20 +37,24 @@ passport.serializeUser(function (user, done) {
 done(null, user)
 })
 passport.deserializeUser(function (obj, done) {
-//console.log(`obj : ${obj}`)
+console.log(`obj : ${obj}`)
 done(null, obj)
 })
 
 router.get('/', passport.authenticate('kakao'), function (req, res) {
 // 로그인 시작시 state 값을 받을 수 있음
+res.send(`accessToken : ${req.user.accessToken}`)
+//res.redirect('http://localhost:3000')
 //res.send(`id : ${req.user.profile.id} / accessToken : ${req.user.accessToken}`)
 //res.redirect('http:localhost:3000');
-app.use(
+//axios.post('https://localhost:3000/signin')
+//console.log(req.user.accessToken);
+/*app.use(
   cors({
   origin: 'http://localhost:3000',
   credentials: true,
   })
-  );
+  );*/
 })
 
 

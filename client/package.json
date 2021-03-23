@@ -7,6 +7,8 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "http-proxy-middleware": "^1.0.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -16,7 +18,6 @@
     "styled-components": "^5.2.1",
     "web-vitals": "^1.0.1"
   },
-  "proxy": "http://localhost:3001/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -46,5 +47,5 @@
   "devDependencies": {
     "gh-pages": "^3.1.0"
   },
-  "homepage": "https://Jaeho96.github.io/makecard"
+  "homepage": "http://localhost:3000"
 }

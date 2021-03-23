@@ -16,6 +16,8 @@ const router = express.Router();
 // });
 
 router.use("/auth/kakao", require("./auth/kakao"));
+router.use("/auth/oauth", require("./auth/oauth"));
+
 router.get("/", (req, res) => {
   res.render("index");
 });

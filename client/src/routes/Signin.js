@@ -2,8 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo2.svg";
 import axios from 'axios';
+import { json } from "body-parser";
 
 const { Kakao } = window;
+
+   
 
 function Signin() {
   const kakaoLoginClickHandler = () => {
@@ -11,6 +14,17 @@ function Signin() {
       scope: "profile, account_email, gender",
       success: function (authObj) {
         console.log(authObj); //토큰
+        fetch('../../../api/auth/oauth', {
+          method: 'POST',
+          headers: {
+          'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(authObj)
+          }).then(response => response.json());
+          
+          
+ 
+
 
         Kakao.API.request({
           url: "/v2/user/me",
@@ -19,9 +33,13 @@ function Signin() {
             console.log(account);
           },
         });
-      },
-    });
-  };
+
+        
+        
+
+      }
+  });
+}
 
   return (
     <div className="Main-sign">
@@ -33,15 +51,7 @@ function Signin() {
         <p> 지금 회원가입하시면 </p>
         <p> 명함이 5초만에 뚝딱!</p>
       </div>
-      <button className="sign-btn" onClick={() => {
-        fetch('http://localhost:3001/api/auth/kakao')
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data);
-        });
-      }}></button>
+      <button className="sign-btn" onClick={kakaoLoginClickHandler}></button>
       
       
       <Link to="/signin" className="sign-btn2">
