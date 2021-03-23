@@ -2,7 +2,7 @@ const express = require('express'); // express 모듈 불러오기
 const app = express();  // express 객체 생성
 const path = require('path');   // path 모듈 불러오기
 const cors = require('cors');
-const port = process.env.PORT || 3000;  // 기본 포트를 app 객체에 설정
+const port = process.env.PORT || 3001;  // 기본 포트를 app 객체에 설정
 
 app.use(cors());
 app.use("/api", require("./routes"));
