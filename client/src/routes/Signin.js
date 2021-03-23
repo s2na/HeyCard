@@ -6,7 +6,7 @@ import { json } from "body-parser";
 
 const { Kakao } = window;
 
-   
+axios.create({  baseURL: "https://heycard.herokuapp.com/" })
 
 function Signin() {
   const kakaoLoginClickHandler = () => {
@@ -14,7 +14,7 @@ function Signin() {
       scope: "profile, account_email, gender",
       success: function (authObj) {
         console.log(authObj); //토큰
-        fetch('../../../api/auth/oauth', {
+        fetch('/api/auth/oauth', {
           method: 'POST',
           headers: {
           'Content-Type': 'application/json'
