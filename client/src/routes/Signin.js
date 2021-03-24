@@ -15,7 +15,14 @@ function Signin() {
       success: function (authObj) {
         console.log(authObj); //토큰
         
-          
+        fetch('https://heycard.herokuapp.com/api/auth/oauth', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({authObj})
+        })
+        .then(response => response.json())
           
  
 
