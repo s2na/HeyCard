@@ -3,17 +3,14 @@ import { Link } from "react-router-dom";
 import Logo from "../Logo2.svg";
 import axios from 'axios';
 import { json } from "body-parser";
-
 const { Kakao } = window;
-
-axios.create({  baseURL: "https://heycard.herokuapp.com/" })
 
 function Signin() {
   const kakaoLoginClickHandler = () => {
     Kakao.Auth.login({
       scope: "profile, account_email, gender",
       success: function (authObj) {
-        console.log(authObj); //토큰
+        //console.log(authObj); //토큰
         
         fetch('/api/auth/oauth', {
           method: 'POST',
@@ -22,25 +19,19 @@ function Signin() {
           },
           body: JSON.stringify({authObj})
         })
-        .then(response => response.json())
-          
- 
-
-
+        .then(response => console.log(JSON.stringify(authObj)));
+      
         Kakao.API.request({
           url: "/v2/user/me",
           success: (res) => {
             const account = res.kakao_account; //사용자 정보
-            console.log(account);
+            //console.log(account);
           },
         });
-
-        
-        
-
       }
   });
 }
+
 
   return (
     <div className="Main-sign">
