@@ -10,6 +10,11 @@ app.use('/api/data', function(req, res) {   // 미들웨어 함수를 특정 경
     res.json({ greeting: 'Hello World' });
 });
 
+/*
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+}
+*/
 app.use(express.static(path.join(__dirname, './client/build')));  // 리액트 정적 파일 제공    (client폴더에서 npm run build)
 
 /*

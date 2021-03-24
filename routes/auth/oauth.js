@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
     //res.send(req.user.accesstoken);
     console.log(req.body);
     res.redirect('./client/build/index.html');
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
 module.exports = router;
