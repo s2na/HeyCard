@@ -21,6 +21,12 @@ function Navigation() {
         <NavLink to="/signin" activeStyle={activeStyle}>
           LOGIN
         </NavLink>
+        <NavLink to="/fileupload" activeStyle={activeStyle}>
+          FileUpload
+        </NavLink>
+        <NavLink to="/createcard" activeStyle={activeStyle}>
+          CreateCard
+        </NavLink>
       </div>
     </div>
     //    Nav-End

@@ -1,3 +1,7 @@
+//=================================
+//   	oauth.js
+// api 라우팅 역할
+//=================================
 const console = require('better-console');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -15,6 +19,9 @@ router.use(bodyParser.json()); // for parsing application/json
 router.use(cors());
 router.use("/auth/kakao", require("./auth/kakao"));
 router.use("/auth/oauth", require("./auth/oauth"));
+router.use("/user/upload", require("./user/userUploadImage"));  // /api/user/upload 요청 시 처리할 라우터 미들웨어
+router.use("/contents/manageCard", require("./contents/manageCard"));
+//router.use("/user/createUser", require("./user/createUserAccount"));
 
 router.get("/", (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
