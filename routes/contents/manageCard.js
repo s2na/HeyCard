@@ -17,29 +17,32 @@ router.post('/create', (req, res) => {
     if(!req.secure){
         res.header("Access-Control-Allow-Origin", "*");
         console.log("name : " + req.body.name);
-        console.log("email : " + req.body.email);
-        console.log("company : " + req.body.company);
+        console.log("mail : " + req.body.email);
+        console.log("corporate : " + req.body.company);
         console.log("position : " + req.body.position);
-        console.log("tel : " + req.body.tel);
+        console.log("phonenumber : " + req.body.phonenumber);
+        console.log("officenumber : " + req.body.officenumber);
         console.log("address : " + req.body.address);
         console.log("introduce : " + req.body.introduce);
         console.log("\n");
         var sql = `INSERT INTO contents (
                         name
-                        , email
-                        , company
+                        , mail
+                        , corporate
                         , position
-                        , tel
+                        , phonenumber
+                        , officenumber
                         , address
                         , introduce
                         , lastUpdateDate
                     ) VALUES(?, ?, ?, ?, ?, ?, ?, NOW());`   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
         var params = [
             , req.body.name
-            , req.body.email
-            , req.body.company
+            , req.body.mail
+            , req.body.corporate
             , req.body.position
-            , req.body.tel
+            , req.body.phonenumber
+            , req.body.officenumber
             , req.body.address
             , req.body.introduce
         ]

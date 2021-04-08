@@ -10,10 +10,11 @@ function testCardPost() {
             },
             body: JSON.stringify({
                 name : '박준',
-                email : '0404pj@naver.com',
-                company : '아코이앤씨',
+                mail : '0404pj@naver.com',
+                corporate : '아코이앤씨',
                 position : 'employee',
-                tel : '01077288550',
+                phonenumber : '01077288550',
+                officenumber : '02-',
                 address : '구로동 98-10',
                 introduce : '안녕하세요. 박준입니다.',
             })
