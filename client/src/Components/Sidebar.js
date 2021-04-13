@@ -34,7 +34,8 @@ function Sidebar() {
       <LeftbarHeader>MY SPACE</LeftbarHeader>
       <LeftbarBody>
         <NavLink
-          to="/myspace/create"
+          exact
+          to="/myspace"
           activeStyle={activeStyle}
           className="Sidebaritem"
         >

@@ -1,5 +1,5 @@
 //=================================
-//   	manageCard.js
+// manageCard.js
 // 
 //=================================
 const bodyParser = require('body-parser');
@@ -16,17 +16,19 @@ router.use(bodyParser.json()); // for parsing application/json
 router.post('/create', (req, res) => {
     if(!req.secure){
         res.header("Access-Control-Allow-Origin", "*");
+        console.log("color : " + req.body.color);
         console.log("name : " + req.body.name);
-        console.log("mail : " + req.body.email);
-        console.log("corporate : " + req.body.company);
+        console.log("mail : " + req.body.mail);
+        console.log("corporate : " + req.body.corporate);
         console.log("position : " + req.body.position);
         console.log("phonenumber : " + req.body.phonenumber);
         console.log("officenumber : " + req.body.officenumber);
         console.log("address : " + req.body.address);
         console.log("introduce : " + req.body.introduce);
         console.log("\n");
-        var sql = `INSERT INTO contents (
-                        name
+        let sql = `INSERT INTO contents (
+                        color
+                        , name
                         , mail
                         , corporate
                         , position
@@ -35,8 +37,9 @@ router.post('/create', (req, res) => {
                         , address
                         , introduce
                         , lastUpdateDate
-                    ) VALUES(?, ?, ?, ?, ?, ?, ?, NOW());`   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
-        var params = [
+                    ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, NOW());`   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
+        let params = [
+            req.body.color
             , req.body.name
             , req.body.mail
             , req.body.corporate
@@ -53,7 +56,7 @@ router.post('/create', (req, res) => {
     }
 });
 
-var returnCnt = 0;
+let returnCnt = 0;
 router.get('/titleCheck', (req, res) => {
     if(!req.secure){
         res.json(returnCnt);
@@ -62,8 +65,8 @@ router.get('/titleCheck', (req, res) => {
 
 router.post('/titleCheck', (req, res) => {
     if(!req.secure){
-        var sql = `SELECT COUNT(1) AS cnt FROM contents WHERE userEmail = ?;`   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
-        var params = [req.body.title]
+        let sql = `SELECT COUNT(1) AS cnt FROM contents WHERE userEmail = ?;`   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
+        let params = [req.body.title]
         mysqlCon.query(sql, params, function(err, result) {
             if(err) {
                 console.log('query is not excuted. select fail...\n' + err);
@@ -73,6 +76,21 @@ router.post('/titleCheck', (req, res) => {
             }
         });
     }
+    /*
+    if(!req.secure){
+        let sql = `SELECT COUNT(1) AS cnt FROM contents WHERE userEmail = ?;`   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
+        let params = [req.body.title]
+        let chkCount = mysqlCon.query(sql, params, function(err, result) {
+                        if(err) {
+                            console.log('query is not excuted. select fail...\n' + err);
+                        } else{
+                            returnCnt = result[0].cnt;
+                            console.log(result[0].cnt);
+                        }
+        });
+    }
+    */
+
 });
 
 module.exports = router;

@@ -15,17 +15,8 @@ function Navigation() {
         <NavLink exact to="/" activeStyle={activeStyle}>
           HOME
         </NavLink>
-        <NavLink to="/myspace/create" activeStyle={activeStyle}>
-          MY SPACE
-        </NavLink>
         <NavLink to="/signin" activeStyle={activeStyle}>
           LOGIN
-        </NavLink>
-        <NavLink to="/fileupload" activeStyle={activeStyle}>
-          FileUpload
-        </NavLink>
-        <NavLink to="/createcard" activeStyle={activeStyle}>
-          CreateCard
         </NavLink>
       </div>
     </div>

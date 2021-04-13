@@ -1,3 +1,9 @@
+//=================================
+// server.js
+// express 구동역할
+// React + Node.js 서버 합치기(https://online.codingapple.com/unit/nodejs-react-integration/?id=2305)
+//=================================
+
 const express = require('express'); // express 모듈 불러오기
 const app = express();  // express 객체 생성
 const path = require('path');   // path 모듈 불러오기
