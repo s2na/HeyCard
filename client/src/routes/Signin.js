@@ -36,15 +36,12 @@ function Signin({ authenticated, login, gettoken, location }) {
               })
             })
             */
-            let json = JSON.stringify({
-                        token: authObj.access_token,
-                        id: res.kakao_account.profile.nickname,
-                       })
-            let res = axios.post('https://heycard.herokuapp.com/api/auth/oauth', json, {
-              headers: {'Content-Type': 'application/json'}
-            })
-            .then(response =>{
-              console.log(response.data)
+             axios.post('https://heycard.herokuapp.com/api/auth/oauth', {
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({
+                token: authObj.access_token,
+                id: res.kakao_account.profile.nickname,
+              })
             });
             setUsername(res.kakao_account.profile.nickname);
           }, // Kakao.API.request.success - end
