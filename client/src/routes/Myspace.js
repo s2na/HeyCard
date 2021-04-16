@@ -1,8 +1,30 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import Sidebar from "../Components/Sidebar";
-import domtoimage from "dom-to-image";
+import domtoimage from "dom-to-image-more";
 import fileDownload from 'file-saver';
+import multer from "multer";
+import mycanvas from "canvas";
+import fs, { link } from "fs";
+import { saveAs } from "file-saver";
+import jpg from "jpeg-js";
+import { save } from "save-file";
+
+function convertURIToImageData(URI) {
+  return new Promise(function(resolve, reject) {
+    if (URI == null) return reject();
+    let canvas = document.createElement('canvas'),
+        context = canvas.getContext('2d'),
+        image = new Image();
+    image.addEventListener('load', function() {
+      canvas.width = image.width;
+      canvas.height = image.height;
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      resolve(context.getImageData(0, 0, canvas.width, canvas.height));
+    }, false);
+    image.src = URI;
+  });
+}
 
 //명함 만들기 main 화면
 const MakemainPositioner = styled.div`
@@ -165,6 +187,7 @@ function Myspace({ usertoken }) {
     officenumber: "",
     address: "",
     introduce: "",
+    image: "",
   });
 
   const handleChange = (e) => {
@@ -180,23 +203,17 @@ function Myspace({ usertoken }) {
   };
 
   const submit = () => {
-    domtoimage
-    .toBlob(document.getElementById("outputimg"))
-    .then(function (blob) {
-      fileDownload.saveAs(blob, '../temp/test.png');
-      //window.saveAs(blob, "outputimg.png");
+/*
+    domtoimage.toJpeg(document.getElementById('my-node'), { quality: 0.95 })
+    .then(function (dataUrl) {
+        let link = document.createElement('a');
+        link.download = 'my-image-name.jpeg';
+        link.href = dataUrl;
+        link.click();
     });
-    
-  /*
-     domtoimage
-       .toBlob(document.getElementById("outputimg"))
-       .then(function (blob) {
-         window.saveAs(blob, "outputimg.png");
-       });
-   */  
-    let useJson = JSON.stringify(values);
-    console.log(useJson);
+*/
 
+/*
     fetch('/api/contents/manageCard/create', {
       method: 'POST',
       headers: {
@@ -206,8 +223,86 @@ function Myspace({ usertoken }) {
     })
     
   };
+*/
+  fetch('/api/contents/manageCard/create', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      token: token,
+      color: values.color,
+      name: values.name,
+      mail: values.mail,
+      corporate: values.corporate,
+      position: values.position,
+      phonenumber: values.phonenumber,
+      officenumber: values.officenumber,
+      address: values.address,
+      introduce: values.introduce,
+      image:  'test',
+    })
+  })
+  //console.log(domtoimage.toBlob(document.getElementById("outputimg")));
+  
+/*
+  let node = document.getElementById('outputimg');
+  let img = new Image();
+    domtoimage.toPng(node).then(function (dataUrl) {
+        img.src = dataUrl;
+        document.body.appendChild(img);
+    }).catch(function (error) {
+        console.error('oops, something went wrong!', error);
+    });
 
-  console.log(values);
+    img.width
+*/
+/*
+let temp = domtoimage.toBlob(document.getElementById('outputimg'))
+let blob = new Blob([temp], { type: "image/png" });
+let url = URL.createObjectURL(blob);
+let img = new Image();
+img.src = url;
+console.log("data length: " + temp.length);
+console.log("url: " + url);
+document.body.appendChild(img);
+*/
+
+/***
+let node = document.getElementById('outputimg');
+let saveDataUrl;
+domtoimage.toPng(node)
+    .then(function (dataUrl) {
+        let img = new Image();
+        saveDataUrl = dataUrl;
+        img.src = dataUrl;
+        console.log(dataUrl);
+        //document.body.appendChild(img);
+        convertURIToImageData(dataUrl).then(function(imageData) {
+        // Here you can use imageData
+        console.log(imageData);
+        });
+    })
+    .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+    });
+*/
+
+/*
+let img = new Image();
+  let image = domtoimage.toCanvas(document.getElementById('outputimg'))
+    .then(function (canvas) {
+      
+      mycanvas.createImageData(image, image.width, image.height);
+      let buffer = mycanvas.toBuffer('image/jpeg')
+      console.log('canvas', canvas.width, canvas.height);
+
+    });
+  
+    let buffer = mycanvas.toBuffer('image/jpeg')
+    fs.writeFileSync('./image.jpeg', buffer)
+*/
+};
 
   return (
     <MakemainPositioner>

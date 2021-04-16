@@ -25,6 +25,7 @@ router.post('/create', (req, res) => {
         console.log("officenumber : " + req.body.officenumber);
         console.log("address : " + req.body.address);
         console.log("introduce : " + req.body.introduce);
+        console.log("image : " + req.body.image);
         console.log("\n");
         let sql = `INSERT INTO contents (
                         color
@@ -35,9 +36,10 @@ router.post('/create', (req, res) => {
                         , phonenumber
                         , officenumber
                         , address
+                        , image
                         , introduce
                         , lastUpdateDate
-                    ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, NOW());`   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
+                    ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW());`   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
         let params = [
             req.body.color
             , req.body.name
@@ -47,6 +49,7 @@ router.post('/create', (req, res) => {
             , req.body.phonenumber
             , req.body.officenumber
             , req.body.address
+            , req.body.image
             , req.body.introduce
         ]
         mysqlCon.query(sql, params, function(err) {
