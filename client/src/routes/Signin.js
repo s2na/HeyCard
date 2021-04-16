@@ -24,7 +24,7 @@ function Signin({ authenticated, login, gettoken, location }) {
           url: "/v2/user/me",
           success: (res) => {
             // res.kakao_account (사용자 정보)
-            fetch('https://heycard.herokuapp.com/api/auth/oauth', {
+            fetch('/api/auth/oauth', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',

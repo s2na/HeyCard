@@ -59,7 +59,7 @@
   },
   "proxy": {
     "/api": {
-      "target": "https://heycard.herokuapp.com:3001",
+      "target": "http://localhost:3001",
       "pathRewrite": {
         "^/api": "/"
       }
