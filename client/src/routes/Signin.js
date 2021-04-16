@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Logo2.svg";
 import { Redirect } from "react-router-dom";
+import axios from "axios";
 
 const { Kakao } = window;
 
@@ -23,6 +24,7 @@ function Signin({ authenticated, login, gettoken, location }) {
           url: "/v2/user/me",
           success: (res) => {
             // res.kakao_account (사용자 정보)
+            /*
             fetch('/api/auth/oauth', {
               method: 'POST',
               headers: {
@@ -33,7 +35,17 @@ function Signin({ authenticated, login, gettoken, location }) {
                   id: res.kakao_account.profile.nickname,
               })
             })
-            
+            */
+            let json = JSON.stringify({
+                        token: authObj.access_token,
+                        id: res.kakao_account.profile.nickname,
+                       })
+            let res = axios.post('https://heycard.herokuapp.com/api/auth/oauth', json, {
+              headers: {'Content-Type': 'application/json'}
+            })
+            .then(response =>{
+              console.log(response.data)
+            });
             setUsername(res.kakao_account.profile.nickname);
           }, // Kakao.API.request.success - end
         }); // Kakao.API.request - end
