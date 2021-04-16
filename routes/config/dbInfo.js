@@ -5,6 +5,14 @@
 // https://lts0606.tistory.com/109 -> Nodejs에서 Mybatis 사용하기
 //=================================
 var mysql = require('mysql');
+/*
+var db_info = {
+    host: 'us-cdbr-east-03.cleardb.com',          // 사용할 DB가 설치된 호스트의 IP
+    user: 'b57b813ec96f75',               // DB의 user 이름
+    password: '3ea5ba65',      // DB를 설치할 때 사용자가 지정한 비밀번호
+    database: 'heroku_a6d2ea31e650b20'         // 사용할 데이터베이스의 이름
+}
+*/
 var db_info = {
     host: 'localhost',          // 사용할 DB가 설치된 호스트의 IP
     port: '3306',               // DB를 설치할 때 사용자가 지정한 포트번호. 따로 지정해주지 않았다면 기본값은 3306

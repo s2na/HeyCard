@@ -17,10 +17,23 @@ function Signin({ authenticated, login, gettoken, location }) {
       success: function (authObj) {
         //토큰
         setToken(authObj.access_token);
+        console.log(authObj.access_token);
+        console.log(authenticated);
         Kakao.API.request({
           url: "/v2/user/me",
           success: (res) => {
             // res.kakao_account (사용자 정보)
+            fetch('/api/auth/oauth', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  token: authObj.access_token,
+                  id: res.kakao_account.profile.nickname,
+              })
+            })
+            
             setUsername(res.kakao_account.profile.nickname);
           }, // Kakao.API.request.success - end
         }); // Kakao.API.request - end
@@ -38,9 +51,11 @@ function Signin({ authenticated, login, gettoken, location }) {
   }, [token]);
 
   // authenticated(boolean: 사용자 로그인 여부)의 값이 true일이면 "/"위치(Home,js)로 이동
+
   const { from } = location.state || { from: { pathname: "/" } };
   if (authenticated) return <Redirect to={from} />;
 
+  
   return (
     <div className="Main-sign">
       <div className="sign-logo">

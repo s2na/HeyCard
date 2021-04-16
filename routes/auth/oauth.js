@@ -1,6 +1,6 @@
 //=================================
 // oauth.js
-// 
+// 로그인, 로그아웃 역할
 //=================================
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -28,15 +28,17 @@ router.get('/', (req, res) => { /// 주소의 요청일 때 실행된다.
     
 });
 
-router.post('/', (req, res) => {    //POST 메서드 / data 주소의 요청일 때만 실행된다.
+router.post('/oauth', (req, res) => {    //POST 메서드 / data 주소의 요청일 때만 실행된다.
     if(!req.secure){
         res.header("Access-Control-Allow-Origin", "*");
-        console.log("accessToken : " + req.body.authObj.access_token);     //accessToken : 12시간, refreshToken : 1주
-        console.log("refreshToken : " + req.body.authObj.refresh_token);     //accessToken : 12시간, refreshToken : 1주
+        //console.log("accessToken : " + req.body.authObj.access_token);     //accessToken : 12시간, refreshToken : 1주
+        //console.log("refreshToken : " + req.body.authObj.refresh_token);     //accessToken : 12시간, refreshToken : 1주
+        console.log("accessToken : " + req.body.token);     //accessToken : 12시간, refreshToken : 1주
+        console.log("refreshToken : " + req.body.id);     //accessToken : 12시간, refreshToken : 1주
         //res.redirect("http://localhost:3000/#/")
 
-        var sql = "INSERT INTO login VALUES(?, ' ', ' ', NOW())";   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
-        var params = [req.body.authObj.access_token];
+        var sql = "INSERT INTO login VALUES(?, ?, ' ', NOW())";   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
+        var params = [req.body.token, req.body.id];
         //var params = [req.body.authObj.access_token, req.body.authObj.refresh_token]
         mysqlCon.query(sql, params, function(err) {
             if(err) console.log('query is not excuted. insert fail...\n' + err);

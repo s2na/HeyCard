@@ -17,8 +17,8 @@ router.use(function(req, res, next) {
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 router.use(bodyParser.json()); // for parsing application/json
 router.use(cors());
-router.use("/auth/kakao", require("./auth/kakao"));
-router.use("/auth/oauth", require("./auth/oauth"));
+//router.use("/auth/kakao", require("./auth/kakao"));
+router.use("/auth", require("./auth/oauth"));
 router.use("/user/upload", require("./user/userUploadImage"));  // /api/user/upload 요청 시 처리할 라우터 미들웨어
 router.use("/contents/manageCard", require("./contents/manageCard"));
 //router.use("/user/createUser", require("./user/createUserAccount"));
