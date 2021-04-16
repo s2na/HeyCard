@@ -19,7 +19,7 @@ function Signin({ authenticated, login, gettoken, location }) {
         //토큰
         setToken(authObj.access_token);
         console.log(authObj.access_token);
-        console.log(authenticated);
+        //console.log(authenticated);
         Kakao.API.request({
           url: "/v2/user/me",
           success: (res) => {
