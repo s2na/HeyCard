@@ -28,7 +28,7 @@ router.get('/', (req, res) => { /// 주소의 요청일 때 실행된다.
     
 });
 
-router.post('/oauth', (req, res) => {    //POST 메서드 / data 주소의 요청일 때만 실행된다.
+router.post('/', (req, res) => {    //POST 메서드 / data 주소의 요청일 때만 실행된다.
     if(!req.secure){
         res.header("Access-Control-Allow-Origin", "*");
         //console.log("accessToken : " + req.body.authObj.access_token);     //accessToken : 12시간, refreshToken : 1주

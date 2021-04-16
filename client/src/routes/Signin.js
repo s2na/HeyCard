@@ -24,8 +24,8 @@ function Signin({ authenticated, login, gettoken, location }) {
           url: "/v2/user/me",
           success: (res) => {
             // res.kakao_account (사용자 정보)
-            /*
-            fetch('/api/auth/oauth', {
+            
+            fetch('https://heycard.herokuapp.com/api/auth/oauth', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
@@ -35,7 +35,8 @@ function Signin({ authenticated, login, gettoken, location }) {
                   id: res.kakao_account.profile.nickname,
               })
             })
-            */
+            
+           /*
              axios.post('https://heycard.herokuapp.com/api/auth/oauth', {
               headers: {'Content-Type': 'application/json'},
               body: JSON.stringify({
@@ -43,6 +44,7 @@ function Signin({ authenticated, login, gettoken, location }) {
                 id: res.kakao_account.profile.nickname,
               })
             });
+            */
             setUsername(res.kakao_account.profile.nickname);
           }, // Kakao.API.request.success - end
         }); // Kakao.API.request - end
