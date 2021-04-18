@@ -24,6 +24,8 @@ function Signin({ authenticated, login, gettoken, location }) {
           url: "/v2/user/me",
           success: (res) => {
             // res.kakao_account (사용자 정보)
+
+            /*
             fetch('/api/auth/oauth', {
               method: 'POST',
               headers: {
@@ -34,16 +36,14 @@ function Signin({ authenticated, login, gettoken, location }) {
                   id: res.kakao_account.profile.nickname,
               })
             })
-            
-           /*
-             axios.post('https://heycard.herokuapp.com/api/auth/oauth', {
+            */
+             axios.post('/api/auth/oauth', {
               headers: {'Content-Type': 'application/json'},
               body: JSON.stringify({
                 token: authObj.access_token,
                 id: res.kakao_account.profile.nickname,
               })
             });
-            */
             setUsername(res.kakao_account.profile.nickname);
           }, // Kakao.API.request.success - end
         }); // Kakao.API.request - end
@@ -77,7 +77,6 @@ function Signin({ authenticated, login, gettoken, location }) {
         <p> 명함이 5초만에 뚝딱!</p>
       </div>
       <button className="sign-btn" onClick={kakaoLoginClickHandler}>
-        {" "}
       </button>
       <Link to="/signin" className="sign-btn2">
         카카오 계정으로 <u>신규 가입하기</u>
