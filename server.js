@@ -11,6 +11,16 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3001;  // 기본 포트를 app 객체에 설정
 
+if (process.env.NODE_ENV === 'production') {
+  // Exprees will serve up production assets
+  app.use(express.static(path.join(__dirname, './client/build')));
+
+  // Express serve up index.html file if it doesn't recognize route
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './client/build', 'index.html'));
+  });
+}
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -29,7 +39,16 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
 }
 */
+
+
+/* 임시제거
 app.use(express.static(path.join(__dirname, './client/build')));  // 리액트 정적 파일 제공    (client폴더에서 npm run build)
+app.get('/', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
+*/
+
 
 /*
 app.get('*', (req, res) => {    // 라우트 설정
@@ -38,10 +57,7 @@ app.get('*', (req, res) => {    // 라우트 설정
 */
 
 
-app.get('/', (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.sendFile(path.join(__dirname, './client/build/index.html'));
-});
+
 
 
 app.listen(port, () => {
