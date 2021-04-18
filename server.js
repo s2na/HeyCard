@@ -9,7 +9,7 @@ const app = express();  // express 객체 생성
 const path = require('path');   // path 모듈 불러오기
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const port = process.env.PORT || 3001;  // 기본 포트를 app 객체에 설정
+const port = process.env.PORT || 80;  // 기본 포트를 app 객체에 설정
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
