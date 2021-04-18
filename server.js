@@ -21,7 +21,7 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(cors());
 app.use("/api", require("./routes"));
 app.use('/api/data', function(req, res) {   // 미들웨어 함수를 특정 경로에 등록
-  res.send({ greeting: 'Hello World' });
+  res.json({ greeting: 'Hello World' });
 });
 
 /*
