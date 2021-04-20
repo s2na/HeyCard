@@ -32,7 +32,7 @@ function Signin({ authenticated, login, gettoken, location }) {
               },
               body: JSON.stringify({
                   token: authObj.access_token,
-                  refresh : authObj.refresh_token,
+                  //refresh : authObj.refresh_token,
                   email: res.kakao_account.email,
               })
             })

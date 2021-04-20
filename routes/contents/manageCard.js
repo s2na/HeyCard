@@ -61,14 +61,14 @@ router.post('/create', (req, res) => {
 
 router.get('/select', (req, res) => {
     if(!req.secure){
-        res.json(returnCnt);
+        //res.json(returnCnt);
     }
 });
 
 let returnCnt = 0;
 router.get('/titleCheck', (req, res) => {
     if(!req.secure){
-        //res.json(returnCnt);
+        res.json(returnCnt);
     }
 });
 
