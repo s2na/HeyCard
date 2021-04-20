@@ -41,7 +41,7 @@ function Signin({ authenticated, login, gettoken, location }) {
               headers: {'Content-Type': 'application/json'},
               body: JSON.stringify({
                 token: authObj.access_token,
-                id: res.kakao_account.profile.nickname,
+                email: res.kakao_account.profile.nickname,
               })
             });
             setUsername(res.kakao_account.profile.nickname);
