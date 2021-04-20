@@ -2,15 +2,15 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "../Logo2.svg";
 
-function Navigation_User({user, logout}) {
-  const {deleteToken} = token || {};
+function Navigation_User({user, logout, usertoken}) {
+  const token = usertoken;
   fetch('/api/auth/oauth/logout', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      deleteToken: token,
+      token: token,
     })
   })
 

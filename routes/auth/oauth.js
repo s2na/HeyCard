@@ -50,12 +50,12 @@ router.post('/login', (req, res) => {    //POST 메서드 / data 주소의 요�
 router.post('/logout', (req, res) => {    //POST 메서드 / data 주소의 요청일 때만 실행된다.
     if(!req.secure){
         res.header("Access-Control-Allow-Origin", "*");
-        console.log("accessToken : " + req.body.deleteToken);     //accessToken : 12시간, refreshToken : 1주
+        console.log("accessToken : " + req.body.token);     //accessToken : 12시간, refreshToken : 1주
         //console.log("refreshToken : " + req.body.refresh);     //accessToken : 12시간, refreshToken : 1주
         //console.log("email : " + req.body.email);     //accessToken : 12시간, refreshToken : 1주
 
         var sql = "DELETE FROM login WHERE accessToken = ?";   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
-        var params = [req.body.deleteToken];
+        var params = [req.body.token];
         //var params = [req.body.authObj.access_token, req.body.authObj.refresh_token]
         mysqlCon.query(sql, params, function(err) {
             if(err) console.log('query is not excuted. insert fail...\n' + err);
