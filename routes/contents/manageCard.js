@@ -59,10 +59,16 @@ router.post('/create', (req, res) => {
     }
 });
 
+router.get('/select', (req, res) => {
+    if(!req.secure){
+        res.json(returnCnt);
+    }
+});
+
 let returnCnt = 0;
 router.get('/titleCheck', (req, res) => {
     if(!req.secure){
-        res.json(returnCnt);
+        //res.json(returnCnt);
     }
 });
 
@@ -79,30 +85,6 @@ router.post('/titleCheck', (req, res) => {
             }
         });
     }
-    /*
-    if(!req.secure){
-        let sql = `SELECT COUNT(1) AS cnt FROM contents WHERE userEmail = ?;`   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
-        let params = [req.body.title]
-        let chkCount = mysqlCon.query(sql, params, function(err, result) {
-                        if(err) {
-                            console.log('query is not excuted. select fail...\n' + err);
-                        } else{
-                            returnCnt = result[0].cnt;
-                            console.log(result[0].cnt);
-                        }
-        });
-    }
-    */
-
 });
 
 module.exports = router;
-
-/*
-INSERT INTO contents (
-    userEmail
-    , title
-    ,name
-    , email
-) VALUES('0404pj@naver.com', 'test', '박준', '0404pj@naver.com')
-*/

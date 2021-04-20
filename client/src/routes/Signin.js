@@ -18,8 +18,6 @@ function Signin({ authenticated, login, gettoken, location }) {
       success: function (authObj) {
         //토큰
         setToken(authObj.access_token);
-        
-        //console.log(authenticated);
         Kakao.API.request({
           url: "/v2/user/me",
           success: (res) => {
@@ -34,20 +32,10 @@ function Signin({ authenticated, login, gettoken, location }) {
               },
               body: JSON.stringify({
                   token: authObj.access_token,
+                  refresh : authObj.refresh_token,
                   email: res.kakao_account.email,
               })
             })
-            
-           /*
-             axios.post('/api/auth/oauth', {
-              headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify({
-                token: authObj.access_token,
-                email: res.kakao_account.profile.nickname,
-              })
-            
-            });
-            */
             setUsername(res.kakao_account.profile.nickname);
           }, // Kakao.API.request.success - end
         }); // Kakao.API.request - end
