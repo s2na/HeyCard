@@ -13,7 +13,8 @@ function Navigation_User({user, logout, usertoken}) {
   };
 
   const handleClick = () => {
-    const token = usertoken;
+    const token = usertoken.token;
+    console.log(token);
     fetch('/api/auth/oauth/logout', {
       method: 'POST',
       headers: {
