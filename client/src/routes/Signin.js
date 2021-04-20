@@ -18,14 +18,15 @@ function Signin({ authenticated, login, gettoken, location }) {
       success: function (authObj) {
         //토큰
         setToken(authObj.access_token);
-        console.log(authObj.access_token);
+        
         //console.log(authenticated);
         Kakao.API.request({
           url: "/v2/user/me",
           success: (res) => {
             // res.kakao_account (사용자 정보)
 
-            
+            //console.log(authObj.access_token);
+            //console.log(res.kakao_account.email);
             fetch('/api/auth/oauth', {
               method: 'POST',
               headers: {
@@ -33,7 +34,7 @@ function Signin({ authenticated, login, gettoken, location }) {
               },
               body: JSON.stringify({
                   token: authObj.access_token,
-                  id: res.kakao_account.profile.nickname,
+                  email: res.kakao_account.email,
               })
             })
             
