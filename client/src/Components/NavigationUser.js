@@ -3,14 +3,14 @@ import { NavLink } from "react-router-dom";
 import Logo from "../Logo2.svg";
 
 function Navigation_User({user, logout}) {
-  const {token} = token || {};
+  const {deleteToken} = token || {};
   fetch('/api/auth/oauth/logout', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-        token: {token},
+      deleteToken: token,
     })
   })
 
