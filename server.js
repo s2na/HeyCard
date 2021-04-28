@@ -10,6 +10,7 @@ const path = require('path');   // path 모듈 불러오기
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3001;  // 기본 포트를 app 객체에 설정
+const http = require('http');
 
 if (process.env.NODE_ENV === 'production') {
   // Exprees will serve up production assets
@@ -56,9 +57,10 @@ app.get('*', (req, res) => {    // 라우트 설정
 });
 */
 
-
-
-
+setInterval(function() {
+  console.log("every 10 minutes (6000000");
+  http.get("https://heycard.herokuapp.com");
+}, 6000000)
 
 app.listen(port, () => {
     console.log(`app listening at http://localhost:${port}`)
