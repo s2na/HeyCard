@@ -24,7 +24,7 @@ function App() {
     <>
       <HashRouter>
         {authenticated ? ( //사용자가 로그인 O
-          <NavigationUser user={user} logout={logout} token={token}/> //사용자의 카카오 닉네임을 받아온 user(state)와 logout함수를 인자로 보내준다.
+          <NavigationUser user={user} logout={logout} usertoken={usertoken}/> //사용자의 카카오 닉네임을 받아온 user(state)와 logout함수를 인자로 보내준다.
         ) : (
           // 사용자가 로그인 X
           <Navigation />
