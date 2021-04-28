@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HashRouter, Route } from "react-router-dom";
 import css from "./App.css";
 
@@ -32,11 +32,10 @@ function App() {
         <Route path="/" exact={true} component={Home} /> {/* HOME 화면 */}
         <Route
           path="/myspace"
-          exact={true}
           render={(props) => <Myspace usertoken={usertoken} {...props} />}
         />
         {/* MY SPACE(명함만들기) 화면 */}
-        <Route path="/myspace/repository" exact={true} component={Repository} />
+        <Route path="/myspace/repository" component={Repository} />
         {/* REPOSITORY(명함보관함) 화면 */}
         <Route
           path="/signin"
