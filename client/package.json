@@ -28,13 +28,14 @@
     "styled-components": "^5.2.1",
     "web-vitals": "^1.0.1"
   },
+  
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "test": "react-scripts test --env = jsdom ",
+    "eject ":"react-scripts eject ",
+    "heroku-postbuild ":"npm run build "
   },
   "eslintConfig": {
     "extends": [
