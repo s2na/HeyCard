@@ -28,7 +28,7 @@ router.get('/', (req, res) => { /// 주소의 요청일 때 실행된다.
     
 });
 
-router.post('/', (req, res) => {    //POST 메서드 / data 주소의 요청일 때만 실행된다.
+router.post('/login', (req, res) => {    //POST 메서드 / data 주소의 요청일 때만 실행된다.
     if(!req.secure){
         res.header("Access-Control-Allow-Origin", "*");
         //console.log("accessToken : " + req.body.authObj.access_token);     //accessToken : 12시간, refreshToken : 1주
@@ -48,8 +48,22 @@ router.post('/', (req, res) => {    //POST 메서드 / data 주소의 요청일 
     }
 });
 
-router.use('/', (req, res) => {     //POST 메서드 / data 주소의 요청일 때만 실행된다.
-    
+router.post('/logout', (req, res) => {    //POST 메서드 / data 주소의 요청일 때만 실행된다.
+    if(!req.secure){
+        res.header("Access-Control-Allow-Origin", "*");
+        console.log("accessToken : " + req.body.token);     //accessToken : 12시간, refreshToken : 1주
+
+        var sql = "DELETE FROM login WHERE accessToken = ?";
+        //var sql = "DELETE FROM login WHERE accessToken = ? AND email = ?";
+        var params = [req.body.token];
+        //var params = [req.body.token, req.body.email];
+        mysqlCon.query(sql, params, function(err) {
+            if(err) console.log('query is not excuted. delete fail...\n' + err);
+            //else res.redirect('/list');
+        });
+    }else{
+        next();
+    }
 });
 
 module.exports = router;
