@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "../Logo2.svg";
 
-function Navigation_User({user, logout, usertoken}) {
+function Navigation_User({user, logout, token}) {
   // Signin.js -> App.js에서 받아온 사용자 카카오 닉네임 {user}와 App.js에서 선언한 logout함수를 인자로 받아온다.
   const {username} = user || {};
   // Signin.js -> App.js에서 받아온 사용자 카카오 닉네임 {user}를 {username}을 선언하여 {username}에 값을 넣어 관리한다.
@@ -17,7 +17,7 @@ function Navigation_User({user, logout, usertoken}) {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-          token: usertoken,
+          token: token,
           //email: res.kakao_account.email,
       })
     })
