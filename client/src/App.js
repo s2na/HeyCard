@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { HashRouter, Route } from "react-router-dom";
 import css from "./App.css";
 
@@ -24,7 +24,7 @@ function App() {
     <>
       <HashRouter>
         {authenticated ? ( //사용자가 로그인 O
-          <NavigationUser user={user} logout={logout} usertoken={usertoken}/> //사용자의 카카오 닉네임을 받아온 user(state)와 logout함수를 인자로 보내준다.
+          <NavigationUser user={user} logout={logout} /> //사용자의 카카오 닉네임을 받아온 user(state)와 logout함수를 인자로 보내준다.
         ) : (
           // 사용자가 로그인 X
           <Navigation />
@@ -32,10 +32,11 @@ function App() {
         <Route path="/" exact={true} component={Home} /> {/* HOME 화면 */}
         <Route
           path="/myspace"
+          exact={true}
           render={(props) => <Myspace usertoken={usertoken} {...props} />}
         />
         {/* MY SPACE(명함만들기) 화면 */}
-        <Route path="/myspace/repository" component={Repository} />
+        <Route path="/myspace/repository" exact={true} component={Repository} />
         {/* REPOSITORY(명함보관함) 화면 */}
         <Route
           path="/signin"
