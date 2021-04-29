@@ -56,8 +56,16 @@ router.post('/insert', (req, res) => {
             , req.body.img
         ]
         mysqlCon.query(sql, params, function(err) {
-            if(err) console.log('query is not excuted. insert fail...\n' + err);
-            //else res.redirect('/list');
+            if(err) {
+                console.log('query is not excuted. insert fail...\n' + err);
+                resultToJson = JSON.stringify('N');
+                console.log(resultToJson);
+                res.send(resultToJson);
+            } else{
+                resultToJson = JSON.stringify('Y');
+                console.log(resultToJson);
+                res.send(resultToJson);
+            }
         });
     }
 });
@@ -73,6 +81,9 @@ router.post('/select', (req, res) => {
         mysqlCon.query(sql, params, function(err, result) {
             if(err) {
                 console.log('query is not excuted. select fail...\n' + err);
+                resultToJson = JSON.stringify('N');
+                console.log(resultToJson);
+                res.send(resultToJson);
             } else{
                 resultToJson = JSON.stringify(result);
                 console.log(resultToJson);
@@ -107,6 +118,81 @@ function getContents(){
 
 */
 
+router.post('/update', (req, res) => {
+    if(!req.secure){
+        res.header("Access-Control-Allow-Origin", "*");
+        console.log("update title : " + req.body.title);
+        console.log("update userEmail : " + req.body.userEmail);
+        console.log("\n");
+        let sql =   `UPDATE contents
+                        SET title = ?
+                            , color = ?
+                            , name = ?
+                            , mail = ?
+                            , corporate = ?
+                            , position = ?
+                            , phonenumber = ?
+                            , officenumber = ?
+                            , address = ?
+                            , image = ?
+                            , introduce = ?
+                            , lastUpdateDate = NOW()
+                        WHERE userEmail = ?
+                        AND title = ? ;`   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
+        let params = [
+            req.body.title
+            , req.body.color
+            , req.body.name
+            , req.body.mail
+            , req.body.corporate
+            , req.body.position
+            , req.body.phonenumber
+            , req.body.officenumber
+            , req.body.address
+            , req.body.img
+            , req.body.introduce
+            , req.body.userEmail
+            , req.body.title
+        ]
+        mysqlCon.query(sql, params, function(err) {
+            if(err) {
+                console.log('query is not excuted. update fail...\n' + err);
+                resultToJson = JSON.stringify('N');
+                console.log(resultToJson);
+                res.send(resultToJson);
+            } else{
+                resultToJson = JSON.stringify('Y');
+                console.log(resultToJson);
+                res.send(resultToJson);
+            }
+        });
+    }
+});
+
+router.post('/delete', (req, res) => {
+    if(!req.secure){
+        res.header("Access-Control-Allow-Origin", "*");
+        const name = req.body.name;
+        console.log("요청받은 이름 : " + name);
+
+        let sql = `DELETE FROM contents WHERE title = ? AND userEmail = ?;`
+        let params = [req.body.title, req.body.userEmail]
+        mysqlCon.query(sql, params, function(err, result) {
+            if(err) {
+                console.log('query is not excuted. delete fail...\n' + err);
+                resultToJson = JSON.stringify('N');
+                console.log(resultToJson);
+                res.send(resultToJson);
+            } else{
+                resultToJson = JSON.stringify('Y');
+                console.log(resultToJson);
+                res.send(resultToJson);
+            }
+        });
+    }
+});
+
+
 router.post('/titleCheck', (req, res) => {
     if(!req.secure){
         let sql = `SELECT COUNT(1) AS cnt FROM contents WHERE userEmail = ? AND title = ?;`   
@@ -114,6 +200,9 @@ router.post('/titleCheck', (req, res) => {
         mysqlCon.query(sql, params, function(err, result) {
             if(err) {
                 console.log('query is not excuted. select fail...\n' + err);
+                resultToJson = JSON.stringify('N');
+                console.log(resultToJson);
+                res.send(resultToJson);
             } else{
                 resultToJson = JSON.stringify(result[0].cnt);
                 console.log(resultToJson);
