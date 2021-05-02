@@ -17,6 +17,9 @@ router.use(bodyParser.json()); // for parsing application/json
 
 router.post('/insert', (req, res) => {
     if(!req.secure){
+        const mysqlCon = db_config.init();
+        db_config.connect(mysqlCon);
+
         res.header("Access-Control-Allow-Origin", "*");
         console.log("title : " + req.body.title);
         console.log("color : " + req.body.color);
@@ -74,6 +77,9 @@ router.post('/insert', (req, res) => {
 
 router.post('/select', (req, res) => {
     if(!req.secure){
+        const mysqlCon = db_config.init();
+        db_config.connect(mysqlCon);
+
         res.header("Access-Control-Allow-Origin", "*");
         const name = req.body.name;
         console.log("요청받은 이름 : " + name);
@@ -122,6 +128,9 @@ function getContents(){
 
 router.post('/update', (req, res) => {
     if(!req.secure){
+        const mysqlCon = db_config.init();
+        db_config.connect(mysqlCon);
+
         res.header("Access-Control-Allow-Origin", "*");
         console.log("update title : " + req.body.title);
         console.log("update userEmail : " + req.body.userEmail);
@@ -173,6 +182,9 @@ router.post('/update', (req, res) => {
 
 router.post('/delete', (req, res) => {
     if(!req.secure){
+        const mysqlCon = db_config.init();
+        db_config.connect(mysqlCon);
+
         res.header("Access-Control-Allow-Origin", "*");
         const name = req.body.name;
         console.log("요청받은 이름 : " + name);
@@ -197,6 +209,9 @@ router.post('/delete', (req, res) => {
 
 router.post('/titleCheck', (req, res) => {
     if(!req.secure){
+        const mysqlCon = db_config.init();
+        db_config.connect(mysqlCon);
+        
         let sql = `SELECT COUNT(1) AS cnt FROM contents WHERE userEmail = ? AND title = ?;`   
         let params = [req.body.email, req.body.title]
         mysqlCon.query(sql, params, function(err, result) {

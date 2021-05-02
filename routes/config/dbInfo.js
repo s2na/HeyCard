@@ -2,7 +2,6 @@
 //   	dbInfo.js
 // server mysql 접속정보
 // https://junspapa-itdev.tistory.com/10 -> 다중쿼리 처리방법, sql에 파라미터 매핑방법
-// https://lts0606.tistory.com/109 -> Nodejs에서 Mybatis 사용하기
 //=================================
 
 let mysql = require('mysql');

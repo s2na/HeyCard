@@ -27,6 +27,7 @@ function Signin({ authenticated, login, gettoken, location }) {
 
             //console.log(authObj.access_token);
             //console.log(res.kakao_account.email);
+            
             fetch('/api/auth/oauth/login', {
               method: 'POST',
               headers: {
