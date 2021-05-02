@@ -64,12 +64,12 @@ function Signin({ authenticated, login, gettoken, location, getUserEmail }) {
 
   useEffect(() => {
     //token state의 값이 변하게 되면 gettoken({token})을 실행
-    return () => getUserEmail({ token });
+    return () => gettoken({ token });
   }, [token]);
 
   useEffect(() => {
     //token state의 값이 변하게 되면 gettoken({token})을 실행
-    return () => gettoken({ userEmail });
+    return () => getUserEmail({ userEmail });
   }, [userEmail]);
 
   // authenticated(boolean: 사용자 로그인 여부)의 값이 true일이면 "/"위치(Home,js)로 이동

@@ -22,7 +22,7 @@ router.post('/insert', (req, res) => {
 
         res.header("Access-Control-Allow-Origin", "*");
         console.log("title : " + req.body.title);
-        console.log("title : " + req.body.userEmail);
+        console.log("userEmail : " + req.body.userEmail);
         console.log("color : " + req.body.color);
         console.log("name : " + req.body.name);
         console.log("mail : " + req.body.mail);
