@@ -39,7 +39,7 @@ function App() {
           render={(props) => <Myspace usertoken={usertoken} userEmail={userEmail} {...props} />}
         />
         {/* MY SPACE(명함만들기) 화면 */}
-        <Route path="/myspace/repository" exact={true} component={Repository} usertoken={usertoken}/>
+        <Route path="/myspace/repository" exact={true} component={Repository} usertoken={usertoken} userEmail={userEmail}/>
         {/* REPOSITORY(명함보관함) 화면 */}
         <Route
           path="/signin"

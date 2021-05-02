@@ -77,7 +77,29 @@ router.post('/insert', (req, res) => {
         });
     }
 });
+router.get('/select', (req, res) => {
+    if(!req.secure){
+        const mysqlCon = db_config.init();
+        db_config.connect(mysqlCon);
 
+        res.header("Access-Control-Allow-Origin", "*");
+
+        let sql = `SELECT * FROM contents;`
+        mysqlCon.query(sql, params, function(err, result) {
+            if(err) {
+                console.log('query is not excuted. select fail...\n' + err);
+                resultToJson = JSON.stringify('N');
+                console.log(resultToJson);
+                res.send(resultToJson);
+            } else{
+                resultToJson = JSON.stringify(result);
+                console.log(resultToJson);
+                res.send(resultToJson);
+            }
+        });
+    }
+});
+/*
 router.post('/select', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
@@ -103,7 +125,7 @@ router.post('/select', (req, res) => {
         });
     }
 });
-
+*/
 /*
 function getContents(){
     return fetch('/api/contents/manageCard/select', {

@@ -32,36 +32,23 @@ const Cardlayer = styled.div`
   border-style: solid;
 `;
 
-function Repository(usertoken) {
+function Repository() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     let completed = false; //초기에는 실행해야 되기때문에 false flag 변수
 
-    function getContents(){
-
-      return fetch('/api/contents/manageCard/select', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: '박준',
-      })
-    })
-    .then(res => res.json())
-    .then(response => {
-      //console.log('Success:', JSON.stringify(response))
-      return JSON.stringify(response);
-  
-    })
+    //query를 리턴하는 함수를 result에 할당
+    async function get() {
+      const result = await axios.get("http://localhost:3001/api/get");
+      if (!completed) setData(result.data);
     }
-    //getContents().then(response => console.log(JSON.parse(response)));
-    //getContents().then(response => console.log(JSON.parse(response)[0]));
-    getContents().then(response => console.log(JSON.parse(response)[0].mail));
-    
-    
-    
+    get();
+    return () => {
+      completed = true;
+    };
+
+    //query가 변할때 useEffect를 실행해야하는 시점이다.
   }, []);
 
   return (
