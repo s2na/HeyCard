@@ -22,6 +22,7 @@ router.post('/insert', (req, res) => {
 
         res.header("Access-Control-Allow-Origin", "*");
         console.log("title : " + req.body.title);
+        console.log("title : " + req.body.userEmail);
         console.log("color : " + req.body.color);
         console.log("name : " + req.body.name);
         console.log("mail : " + req.body.mail);
@@ -35,6 +36,7 @@ router.post('/insert', (req, res) => {
         console.log("\n");
         let sql = `INSERT INTO contents (
                         title
+                        , userEmail
                         , color
                         , name
                         , mail
@@ -46,9 +48,10 @@ router.post('/insert', (req, res) => {
                         , introduce
                         , image
                         , lastUpdateDate
-                    ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW());`   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
+                    ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW());`   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
         let params = [
             req.body.title
+            , req.body.userEmail
             , req.body.color
             , req.body.name
             , req.body.mail
@@ -211,7 +214,7 @@ router.post('/titleCheck', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
         db_config.connect(mysqlCon);
-        
+
         let sql = `SELECT COUNT(1) AS cnt FROM contents WHERE userEmail = ? AND title = ?;`   
         let params = [req.body.email, req.body.title]
         mysqlCon.query(sql, params, function(err, result) {

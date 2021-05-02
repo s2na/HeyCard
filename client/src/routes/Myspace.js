@@ -153,11 +153,12 @@ const Introduceinput = styled.textarea`
   border-radius: 15px;
 `;
 
-function Myspace({ usertoken }) {
+function Myspace({ usertoken, userEmail }) {
   const { token } = usertoken || {}; // App.js에서 token값 가져오기
-
+  const { email } = userEmail || {};
   const [values, setValues] = useState({
     token: token,
+    userEmail: email,
     color: "",
     name: "",
     mail: "",

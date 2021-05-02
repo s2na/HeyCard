@@ -9,6 +9,7 @@ const Modal = (props) => {
   const submit = () => {
     Axios.post("/api/contents/manageCard/insert", {
       token: values.token,
+      userEmail: values.userEmail,
       color: values.color,
       name: values.name,
       mail: values.mail,
@@ -28,7 +29,7 @@ const Modal = (props) => {
   useEffect(() => {
     //query를 리턴하는 함수를 result에 할당
     async function get() {
-      const result = await Axios.get("/api/contents/manageCard/titleCheck");
+      const result = await Axios.post("/api/contents/manageCard/titleCheck");
       setData(result.data);
     }
     get();

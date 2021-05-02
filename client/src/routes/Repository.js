@@ -32,13 +32,14 @@ const Cardlayer = styled.div`
   border-style: solid;
 `;
 
-function Repository() {
+function Repository(usertoken) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     let completed = false; //초기에는 실행해야 되기때문에 false flag 변수
 
     function getContents(){
+
       return fetch('/api/contents/manageCard/select', {
       method: 'POST',
       headers: {
@@ -55,12 +56,11 @@ function Repository() {
   
     })
     }
-    getContents().then(response => console.log(JSON.parse(response)));
-    getContents().then(response => console.log(JSON.parse(response)[0]));
+    //getContents().then(response => console.log(JSON.parse(response)));
+    //getContents().then(response => console.log(JSON.parse(response)[0]));
     getContents().then(response => console.log(JSON.parse(response)[0].mail));
-
     
-
+    
     
   }, []);
 
