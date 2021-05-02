@@ -77,6 +77,7 @@ router.post('/insert', (req, res) => {
         });
     }
 });
+/*
 router.get('/select', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
@@ -90,7 +91,8 @@ router.get('/select', (req, res) => {
         });
     }
 });
-/*
+*/
+
 router.post('/select', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
@@ -116,7 +118,7 @@ router.post('/select', (req, res) => {
         });
     }
 });
-*/
+
 /*
 function getContents(){
     return fetch('/api/contents/manageCard/select', {
