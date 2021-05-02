@@ -1,30 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Sidebar from "../Components/Sidebar";
-import domtoimage from "dom-to-image-more";
-import fileDownload from 'file-saver';
-import multer from "multer";
-import mycanvas from "canvas";
-import fs, { link } from "fs";
-import { saveAs } from "file-saver";
-import jpg from "jpeg-js";
-import { save } from "save-file";
-
-function convertURIToImageData(URI) {
-  return new Promise(function(resolve, reject) {
-    if (URI == null) return reject();
-    let canvas = document.createElement('canvas'),
-        context = canvas.getContext('2d'),
-        image = new Image();
-    image.addEventListener('load', function() {
-      canvas.width = image.width;
-      canvas.height = image.height;
-      context.drawImage(image, 0, 0, canvas.width, canvas.height);
-      resolve(context.getImageData(0, 0, canvas.width, canvas.height));
-    }, false);
-    image.src = URI;
-  });
-}
+import Axios from "axios";
+import domtoimage from "dom-to-image";
+import FileSaver, { saveAs } from "file-saver";
+import Modal from "../Components/Modal";
 
 //명함 만들기 main 화면
 const MakemainPositioner = styled.div`
@@ -187,8 +167,28 @@ function Myspace({ usertoken }) {
     officenumber: "",
     address: "",
     introduce: "",
-    image: "",
+    img: "",
+    title: "",
   });
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = (e) => {
+    setModalOpen(true);
+    const { name } = e.target;
+    domtoimage
+      .toBlob(document.getElementById("outputimg"))
+      .then(function (blob) {
+        let reader = new FileReader(); //캡쳐한 blob을 dataurl로 변환
+        reader.readAsDataURL(blob);
+        reader.onloadend = () => {
+          let base64data = reader.result;
+          setValues({ ...values, [name]: base64data });
+        };
+      });
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   const handleChange = (e) => {
     // Basicinfo input eventhandle function
@@ -202,107 +202,7 @@ function Myspace({ usertoken }) {
     setValues({ ...values, [name]: value });
   };
 
-  const submit = () => {
-/*
-    domtoimage.toJpeg(document.getElementById('my-node'), { quality: 0.95 })
-    .then(function (dataUrl) {
-        let link = document.createElement('a');
-        link.download = 'my-image-name.jpeg';
-        link.href = dataUrl;
-        link.click();
-    });
-*/
-
-/*
-    fetch('/api/contents/manageCard/create', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(values)
-    })
-    
-  };
-*/
-  fetch('/api/contents/manageCard/create', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      token: token,
-      color: values.color,
-      name: values.name,
-      mail: values.mail,
-      corporate: values.corporate,
-      position: values.position,
-      phonenumber: values.phonenumber,
-      officenumber: values.officenumber,
-      address: values.address,
-      introduce: values.introduce,
-      image:  'test',
-    })
-  })
-  //console.log(domtoimage.toBlob(document.getElementById("outputimg")));
-  
-/*
-  let node = document.getElementById('outputimg');
-  let img = new Image();
-    domtoimage.toPng(node).then(function (dataUrl) {
-        img.src = dataUrl;
-        document.body.appendChild(img);
-    }).catch(function (error) {
-        console.error('oops, something went wrong!', error);
-    });
-
-    img.width
-*/
-/*
-let temp = domtoimage.toBlob(document.getElementById('outputimg'))
-let blob = new Blob([temp], { type: "image/png" });
-let url = URL.createObjectURL(blob);
-let img = new Image();
-img.src = url;
-console.log("data length: " + temp.length);
-console.log("url: " + url);
-document.body.appendChild(img);
-*/
-
-/***
-let node = document.getElementById('outputimg');
-let saveDataUrl;
-domtoimage.toPng(node)
-    .then(function (dataUrl) {
-        let img = new Image();
-        saveDataUrl = dataUrl;
-        img.src = dataUrl;
-        console.log(dataUrl);
-        //document.body.appendChild(img);
-        convertURIToImageData(dataUrl).then(function(imageData) {
-        // Here you can use imageData
-        console.log(imageData);
-        });
-    })
-    .catch(function (error) {
-        console.error('oops, something went wrong!', error);
-    });
-*/
-
-/*
-let img = new Image();
-  let image = domtoimage.toCanvas(document.getElementById('outputimg'))
-    .then(function (canvas) {
-      
-      mycanvas.createImageData(image, image.width, image.height);
-      let buffer = mycanvas.toBuffer('image/jpeg')
-      console.log('canvas', canvas.width, canvas.height);
-
-    });
-  
-    let buffer = mycanvas.toBuffer('image/jpeg')
-    fs.writeFileSync('./image.jpeg', buffer)
-*/
-};
+  console.log(values);
 
   return (
     <MakemainPositioner>
@@ -424,9 +324,20 @@ let img = new Image();
             />
           </Infoinputposition>
           <Infoinputposition>
-            <button id="submitbtn" onClick={submit}>
-              버튼
+            <button name="img" onClick={openModal}>
+              저장
             </button>
+            {/* header 부분에 텍스트를 입력한다. */}
+            <Modal open={modalOpen} close={closeModal} values={values}>
+              {/* Modal.js <main> {props.children} </main>에 내용이 입력된다. */}
+              명함 이름을 지어주세요
+              <input
+                name="title"
+                value={values.title}
+                onChange={handleChange}
+                placeholder="명함 이름을 입력하세요"
+              ></input>
+            </Modal>
           </Infoinputposition>
         </Infoinputs>
       </Inputform>
