@@ -74,21 +74,20 @@ useEffect(() => {
   
     })
   }
-  getContents().then(response => console.log(JSON.parse(response)));
+  const resultImage = getContents().then(response => console.log(JSON.parse(response)));
   //getContents().then(response => console.log(JSON.parse(response)[0]));
   //getContents().then(response => console.log(JSON.parse(response)[0].mail));
   
   
-}, []);
+  }, []);
+
   return (
     <MakemainPositioner>
       <Sidebar />
       <Outputform>
         <Outputlayer>
           <Cardlayer>
-            {data.map((item) => (
-              <img src={getContents().then(response => console.log(JSON.parse(response)[0].image))} width="150" height="250"></img>
-            ))}
+            
           </Cardlayer>
         </Outputlayer>
       </Outputform>
