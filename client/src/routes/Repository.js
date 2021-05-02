@@ -58,7 +58,7 @@ function Repository() {
         <Outputlayer>
           <Cardlayer>
             {data.map((item) => (
-              <img src={item.img} width="150" height="250"></img>
+              <img src={item.image} width="150" height="250"></img>
             ))}
           </Cardlayer>
         </Outputlayer>
