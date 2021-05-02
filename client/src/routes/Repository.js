@@ -64,7 +64,8 @@ useEffect(() => {
           'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: '박준',
+        //userEmail
+        //token
       })
     })
     .then(res => res.json())

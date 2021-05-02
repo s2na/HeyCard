@@ -15,6 +15,7 @@ router.use(cors());
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 router.use(bodyParser.json()); // for parsing application/json
 
+//모달에서 명함 POST (명함만들기) -> /api/contents/manageCard/insert
 router.post('/insert', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
@@ -93,6 +94,7 @@ router.get('/select', (req, res) => {
 });
 */
 
+//사용자 명함 불러오기(명함보관함)  -> /api/contents/manageCard/select
 router.post('/select', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
@@ -144,6 +146,7 @@ function getContents(){
 
 */
 
+//명함 수정하기(명함보관함) -> /api/contents/manageCard/update
 router.post('/update', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
@@ -198,6 +201,7 @@ router.post('/update', (req, res) => {
     }
 });
 
+//명함 삭제하기(명함보관함) -> /api/contents/manageCard/delete
 router.post('/delete', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
@@ -224,7 +228,7 @@ router.post('/delete', (req, res) => {
     }
 });
 
-
+//명함 제목 중복 체크(명함만들기) -> /api/contents/manageCard/titleCheck
 router.post('/titleCheck', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
