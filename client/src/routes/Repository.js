@@ -40,7 +40,7 @@ function Repository() {
 
     //query를 리턴하는 함수를 result에 할당
     async function get() {
-      const result = await axios.get("http://localhost:3001/api/get");
+      const result = await axios.get("/api/contents/manageCard/select");
       if (!completed) setData(result.data);
     }
     get();

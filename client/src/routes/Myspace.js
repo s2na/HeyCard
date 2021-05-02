@@ -155,7 +155,7 @@ const Introduceinput = styled.textarea`
 
 function Myspace({ usertoken, userEmail }) {
   const { token } = usertoken || {}; // App.js에서 token값 가져오기
-  const { email } = userEmail || {};
+  const { email } = userEmail.userEmail || {};
   const [values, setValues] = useState({
     token: token,
     userEmail: email,
