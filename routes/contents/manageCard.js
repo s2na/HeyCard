@@ -85,17 +85,8 @@ router.get('/select', (req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
 
         let sql = `SELECT * FROM contents;`
-        mysqlCon.query(sql, params, function(err, result) {
-            if(err) {
-                console.log('query is not excuted. select fail...\n' + err);
-                resultToJson = JSON.stringify('N');
-                console.log(resultToJson);
-                res.send(resultToJson);
-            } else{
-                resultToJson = JSON.stringify(result);
-                console.log(resultToJson);
-                res.send(resultToJson);
-            }
+        mysqlCon.query(sql, (err, result) => {
+            res.send(result);
         });
     }
 });
