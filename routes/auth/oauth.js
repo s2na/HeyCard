@@ -9,9 +9,9 @@ const axios = require('axios');
 const express = require('express');
 const router = express.Router();
 const db_config = require('../config/dbInfo.js');
-//const mysqlCon = db_config.init();
-const mysqlCon = db_config;
-//db_config.connect(mysqlCon);
+const mysqlCon = db_config.init();
+
+db_config.connect(mysqlCon);
 
 router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
