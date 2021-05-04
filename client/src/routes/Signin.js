@@ -6,11 +6,11 @@ import axios from "axios";
 
 const { Kakao } = window;
 
-function Signin({ authenticated, login, gettoken, location, getUserEmail }) {
+function Signin({ authenticated, login, gettoken, getusermail, location }) {
   // authenticated(state: 로그인 인증), login(function: username state를 App.js로 넘겨줌)
   const [username, setUsername] = useState("");
-  const [userEmail, setUserEmail] = useState("");
   const [token, setToken] = useState("");
+  const [logmail, setlogMail] = useState("");
   // 카카오 로그인 api에서 사용자 정보 중 nickname만 setUsername으로 빼내서 state 관리
   const kakaoLoginClickHandler = () => {
     //카카오 로그인 api
@@ -51,7 +51,7 @@ function Signin({ authenticated, login, gettoken, location, getUserEmail }) {
             });
             */
             setUsername(res.kakao_account.profile.nickname);
-            setUserEmail(res.kakao_account.email);
+            setlogMail(res.kakao_account.email);
           }, // Kakao.API.request.success - end
         }); // Kakao.API.request - end
       }, // Kakao.Auth.login.success - end
@@ -68,9 +68,9 @@ function Signin({ authenticated, login, gettoken, location, getUserEmail }) {
   }, [token]);
 
   useEffect(() => {
-    //token state의 값이 변하게 되면 gettoken({token})을 실행
-    return () => getUserEmail({ userEmail });
-  }, [userEmail]);
+    //usermail state의 값이 변하게 되면 getusermail({usermail})을 실행
+    return () => getusermail({ logmail });
+  }, [logmail]);
 
   // authenticated(boolean: 사용자 로그인 여부)의 값이 true일이면 "/"위치(Home,js)로 이동
 
