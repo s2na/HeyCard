@@ -48,7 +48,7 @@ const Outputlayer = styled.div`
   justify-content: space-between;
 `;
 
-function getContents(){
+function getContents(repositoken, reposimail){
 
   return fetch('/api/contents/manageCard/select', {
     method: 'POST',
@@ -56,13 +56,13 @@ function getContents(){
         'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      //userEmail
-      //token
+      userEmail: repositoken,
+      token: reposimail,
     })
   })
   .then(res => res.json())
   .then(response => {
-    //console.log('Success:', JSON.stringify(response))
+    console.log('Repoist Select Success:', JSON.stringify(response))
     return JSON.stringify(response);
 
   })
@@ -80,7 +80,7 @@ function Repository({ usertoken, usermail }) {
     let completed = false; //초기에는 실행해야 되기때문에 false flag 변수
 
     async function get() {
-      const result = getContents();
+      const result = getContents(repositoken, reposimail);
       if (!completed) setData(result.data);
     }
     get();
