@@ -128,29 +128,51 @@ const Infotitle = styled.div`
 
 const Infoinputs = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   flex-direction: column;
 `;
 
-const Infoinputposition = styled.div``;
+const Infoinputposition = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 0.5rem;
+`;
 
 const Infoinput = styled.input`
-  width: 500px;
+  width: 60%;
+  height: 20px;
   font-size: 15px;
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
   margin-left: 2rem;
-  margin-right: 8rem;
+  margin-right: 7rem;
   border-radius: 15px;
 `;
 
 const Introduceinput = styled.textarea`
-  width: 500px;
+  width: 80%;
   height: 230px;
   font-size: 15px;
   margin-top: 1rem;
   margin-left: 2rem;
-  margin-right: 8rem;
+  margin-right: 3rem;
   border-radius: 15px;
+`;
+
+const Submitbutposition = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.5rem;
+`;
+
+const Submitbtn = styled.button`
+  width: 40%;
+  height: 50px;
+  min-width: 200px;
+  background-color: #a259ff;
+  border-style: none;
 `;
 
 function Myspace({ usertoken, usermail }) {
@@ -325,10 +347,10 @@ function Myspace({ usertoken, usermail }) {
               onChange={handleChange}
             />
           </Infoinputposition>
-          <Infoinputposition>
-            <button name="img" onClick={openModal}>
+          <Submitbutposition>
+            <Submitbtn name="img" onClick={openModal}>
               저장
-            </button>
+            </Submitbtn>
             {/* header 부분에 텍스트를 입력한다. */}
             <Modal open={modalOpen} close={closeModal} values={values}>
               {/* Modal.js <main> {props.children} </main>에 내용이 입력된다. */}
@@ -340,7 +362,7 @@ function Myspace({ usertoken, usermail }) {
                 placeholder="명함 이름을 입력하세요"
               ></input>
             </Modal>
-          </Infoinputposition>
+          </Submitbutposition>
         </Infoinputs>
       </Inputform>
     </MakemainPositioner>

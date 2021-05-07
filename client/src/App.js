@@ -13,7 +13,6 @@ function App() {
   const [user, setUser] = useState(null);
   // login({username})의 함수를 통해 Signin.js에서 username을 가져와 setUser을 통해 상태관리
   const authenticated = user != null; // 사용자 로그인 인증
-
   const login = ({ username }) => setUser({ username });
   const logout = () => setUser(null);
 
@@ -41,7 +40,18 @@ function App() {
           )}
         />
         {/* MY SPACE(명함만들기) 화면 */}
-        <Route path="/myspace/repository" exact={true} component={Repository} usertoken={usertoken} usermail={usermail}/>
+        {/*<Route path="/myspace/repository" exact={true} component={Repository} usertoken={usertoken} usermail={usermail}/>*/}
+        <Route
+          path="/myspace/repository"
+          exact={true}
+          render={(props) => (
+            <Repository
+              usertoken={usertoken}
+              usermail={usermail}
+              {...[props]}
+            />
+          )}
+        />
         {/* REPOSITORY(명함보관함) 화면 */}
         <Route
           path="/signin"
