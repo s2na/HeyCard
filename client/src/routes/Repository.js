@@ -56,8 +56,8 @@ function getContents(repositoken, reposimail){
         'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      userEmail: repositoken,
-      token: reposimail,
+      userEmail: reposimail,
+      token: repositoken,
     })
   })
   .then(res => res.json())
