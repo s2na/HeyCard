@@ -113,10 +113,10 @@ router.post('/select', (req, res) => {
                 console.log(resultToJson);
                 res.send(resultToJson);
             } else{
-                //resultToJson = JSON.stringify(result);
-                //console.log(resultToJson);
-                //res.send(resultToJson);
-                res.send(result[0]);
+                resultToJson = JSON.stringify(result);
+                console.log(resultToJson);
+                res.send(resultToJson);
+                //res.send(result[0]);
             }
         });
     }
