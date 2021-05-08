@@ -94,6 +94,7 @@ router.get('/select', (req, res) => {
 });
 */
 
+/*
 //사용자 명함 불러오기(명함보관함)  -> /api/contents/manageCard/select
 router.post('/select', (req, res) => {
     if(!req.secure){
@@ -113,11 +114,27 @@ router.post('/select', (req, res) => {
                 console.log(resultToJson);
                 res.send(resultToJson);
             } else{
-                resultToJson = JSON.stringify(result);
-                console.log(resultToJson);
-                res.send(resultToJson);
+                //resultToJson = JSON.stringify(result);
+                //console.log(resultToJson);
+                //res.send(resultToJson);
                 //res.send(result[0]);
+
+                res.send(result);
             }
+        });
+    }
+});
+*/
+
+router.get('/select', (req, res) => {
+    if(!req.secure){
+        const mysqlCon = db_config.init();
+        db_config.connect(mysqlCon);
+
+        res.header("Access-Control-Allow-Origin", "*");
+        let sql = `SELECT * FROM contents;`
+        mysqlCon.query(sqlSelect, (err, result) => {
+            res.send(result);
         });
     }
 });
