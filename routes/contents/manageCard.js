@@ -78,54 +78,8 @@ router.post('/insert', (req, res) => {
         });
     }
 });
-/*
-router.get('/select', (req, res) => {
-    if(!req.secure){
-        const mysqlCon = db_config.init();
-        db_config.connect(mysqlCon);
 
-        res.header("Access-Control-Allow-Origin", "*");
-
-        let sql = `SELECT * FROM contents;`
-        mysqlCon.query(sql, (err, result) => {
-            res.send(result);
-        });
-    }
-});
-*/
-
-/*
 //사용자 명함 불러오기(명함보관함)  -> /api/contents/manageCard/select
-router.post('/select', (req, res) => {
-    if(!req.secure){
-        const mysqlCon = db_config.init();
-        db_config.connect(mysqlCon);
-
-        res.header("Access-Control-Allow-Origin", "*");
-        const userEmail = req.body.userEmail;
-        console.log("요청받은 유저 이메일 : " + req.body.userEmail);
-
-        let sql = `SELECT * FROM contents WHERE userEmail = ?;`
-        let params = [req.body.userEmail]
-        mysqlCon.query(sql, params, function(err, result) {
-            if(err) {
-                console.log('query is not excuted. select fail...\n' + err);
-                resultToJson = JSON.stringify('N');
-                console.log(resultToJson);
-                res.send(resultToJson);
-            } else{
-                //resultToJson = JSON.stringify(result);
-                //console.log(resultToJson);
-                //res.send(resultToJson);
-                //res.send(result[0]);
-
-                res.send(result);
-            }
-        });
-    }
-});
-*/
-
 router.post('/select', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
@@ -184,8 +138,10 @@ router.post('/update', (req, res) => {
         console.log("update title : " + req.body.title);
         console.log("update userEmail : " + req.body.userEmail);
         console.log("\n");
+
         let sql =   `UPDATE contents
                         SET title = ?
+                            , userEmail = ?
                             , color = ?
                             , name = ?
                             , mail = ?
@@ -201,6 +157,7 @@ router.post('/update', (req, res) => {
                         AND title = ? ;`   // INSERT 하기전에 이미 있는지 확인하는 기능 추가예정
         let params = [
             req.body.title
+            , req.body.userEmail
             , req.body.color
             , req.body.name
             , req.body.mail
@@ -209,8 +166,8 @@ router.post('/update', (req, res) => {
             , req.body.phonenumber
             , req.body.officenumber
             , req.body.address
-            , req.body.img
             , req.body.introduce
+            , req.body.img
             , req.body.userEmail
             , req.body.title
         ]
@@ -236,8 +193,8 @@ router.post('/delete', (req, res) => {
         db_config.connect(mysqlCon);
 
         res.header("Access-Control-Allow-Origin", "*");
-        const name = req.body.name;
-        console.log("요청받은 이름 : " + name);
+        console.log(" delete title : " + req.body.title);
+        console.log(" delete userEmail : " + req.body.userEmail);
 
         let sql = `DELETE FROM contents WHERE title = ? AND userEmail = ?;`
         let params = [req.body.title, req.body.userEmail]
