@@ -135,6 +135,7 @@ router.get('/select', (req, res) => {
         let sql = `SELECT * FROM contents;`
         mysqlCon.query(sql, (err, result) => {
             res.send(result);
+            console.log(result);
         });
     }
 });
