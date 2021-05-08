@@ -29,7 +29,7 @@ function Signin({ authenticated, login, gettoken, getusermail, location }) {
             //console.log(authObj.access_token);
             //console.log(res.kakao_account.email);
             
-            
+            /*
             fetch('/api/auth/oauth/login', {
               method: 'POST',
               headers: {
@@ -40,9 +40,11 @@ function Signin({ authenticated, login, gettoken, getusermail, location }) {
                   email: res.kakao_account.email,
               })
             })
-            
+            */
+
+
             async function get() {
-              const result = await axios.post('/api/auth/oauth', {
+              const result = await axios.post('/api/auth/oauth/login', {
                 headers: {
                   'Content-Type': 'application/json'
                 },
@@ -54,7 +56,7 @@ function Signin({ authenticated, login, gettoken, getusermail, location }) {
             }
             
             get();
-            
+
             setUsername(res.kakao_account.profile.nickname);
             setlogMail(res.kakao_account.email);
           }, // Kakao.API.request.success - end
