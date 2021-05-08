@@ -133,7 +133,7 @@ router.get('/select', (req, res) => {
 
         res.header("Access-Control-Allow-Origin", "*");
         let sql = `SELECT * FROM contents;`
-        mysqlCon.query(sqlSelect, (err, result) => {
+        mysqlCon.query(sql, (err, result) => {
             res.send(result);
         });
     }
