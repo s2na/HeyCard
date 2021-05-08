@@ -65,8 +65,6 @@ function getContents(repositoken, reposimail){
     //console.log(repositoken);
     //console.log(reposimail);
     //console.log('Repoist Select Success:', JSON.stringify(response))
-    console.log(JSON.parse(response));
-    console.log(JSON.parse(response)[0]);
     return JSON.stringify(response);
     
     //console.log(response);
@@ -92,8 +90,9 @@ function Repository({ usertoken, usermail }) {
       if (!completed) {
         //setData(result.data);
         //console.log(result.data);
-        
-        setData(result);
+        console.log(JSON.parse(result));
+        console.log(JSON.parse(result)[0]);
+        setData(JSON.parse(result));
 
       }
     }
