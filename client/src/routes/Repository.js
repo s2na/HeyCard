@@ -131,10 +131,10 @@ function Repository({ usertoken, usermail }) {
         <Outputlayer>
           {filterCard.map((item) => (
             <Card
-              address={item.adress}
+              address={item.address}
               color={item.color}
               coporate={item.corporate}
-              img={item.img}
+              img={item.image}
               introduce={item.introduce}
               logmail={item.logmail}
               mail={item.mail}

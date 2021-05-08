@@ -11,7 +11,7 @@ const Cardposition = styled.div`
   position: relative;
 `;
 
-const Img = styled.img`
+const Img = styled.image`
   min-height: 350px;
 `;
 
@@ -42,7 +42,7 @@ function Card({
   address,
   color,
   corporate,
-  img,
+  image,
   introduce,
   logmail,
   mail,
@@ -60,7 +60,7 @@ function Card({
 
   return (
     <Cardposition>
-      <Img src={img} width="250px" height="350px" />
+      <Img src={image} width="250px" height="350px" />
       <div className="card_data">
         <Cardtitle className="card_title">
           {title}
