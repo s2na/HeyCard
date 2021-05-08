@@ -48,32 +48,6 @@ const Outputlayer = styled.div`
   justify-content: space-between;
 `;
 
-function getContents(repositoken, reposimail){
-
-  return fetch('/api/contents/manageCard/select', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      userEmail: reposimail,
-      token: repositoken,
-    })
-  })
-  .then(res => res.json())
-  .then(response => {
-    //console.log(repositoken);
-    //console.log(reposimail);
-    //console.log('Repoist Select Success:', JSON.stringify(response))
-    return JSON.stringify(response);
-    
-    //console.log(response);
-    //console.log(response.data);
-    //return response;
-  })
-}
-
-
 function Repository({ usertoken, usermail }) {
   const [data, setData] = useState([]);
   const { repositoken } = usertoken || {}; // App.js에서 token값 가져오기
@@ -83,10 +57,9 @@ function Repository({ usertoken, usermail }) {
   useEffect(() => {
     // DB에 있는 모든 정보들을 호출하는 API가 컴포넌트 마운트 전에 실행
     let completed = false; //초기에는 실행해야 되기때문에 false flag 변수
-    console.log(usertoken);
-    console.log(usermail);
+
     async function get() {
-      const result = await axios.get("/api/contents/manageCard/select");
+      const result = await axios.get("http://localhost:3001/api/get");
       if (!completed) setData(result.data);
     }
     get();
@@ -103,6 +76,7 @@ function Repository({ usertoken, usermail }) {
   const handleChange = (e) => {
     setSearchdata(e.target.value);
   };
+
 
   return (
     <MakemainPositioner>
