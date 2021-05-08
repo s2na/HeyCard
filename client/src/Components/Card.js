@@ -11,7 +11,7 @@ const Cardposition = styled.div`
   position: relative;
 `;
 
-const Img = styled.image`
+const Img = styled.img`
   min-height: 350px;
 `;
 
