@@ -63,8 +63,8 @@ function Repository({ usertoken, usermail }) {
       if (!completed) {
         //console.log(result);
         //console.log(result.data);
-        console.log(JSON.parse(result));
-        setData(JSON.parse(result));
+        console.log(JSON.parse(JSON.stringify(result)));
+        setData(JSON.parse(JSON.stringify(result)));
       }
     }
     get();
