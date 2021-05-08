@@ -66,13 +66,16 @@ function getContents(repositoken, reposimail){
     //console.log(reposimail);
     //console.log('Repoist Select Success:', JSON.stringify(response))
     //return JSON.stringify(response);
+    console.log(response);
+    console.log(response.data);
     return response;
   })
 }
 
 
 function Repository({ usertoken, usermail }) {
-  const [data, setData] = useState([]);
+  //const [data, setData] = useState([]);
+  const [data, setData] = useState([]);;
   const { repositoken } = usertoken || {}; // App.js에서 token값 가져오기
   const { reposimail } = usermail || {}; // App.js에서 logmail값 가져오기
   const [searchdata, setSearchdata] = useState("");
