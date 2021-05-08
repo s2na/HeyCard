@@ -60,8 +60,9 @@ function Repository({ usertoken, usermail }) {
 
     async function get() {
       //const result = await axios.post("/api/contents/manageCard/select");
-      const result = await axios.post('/api/contents/manageCard/select', {
+      const result = await axios({
         method: 'POST',
+        url: '/api/contents/manageCard/select',
         headers: {
             'Content-Type': 'application/json',
         },
