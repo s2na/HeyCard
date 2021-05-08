@@ -116,7 +116,7 @@ router.post('/select', (req, res) => {
                 //resultToJson = JSON.stringify(result);
                 //console.log(resultToJson);
                 //res.send(resultToJson);
-                res.send(result);
+                res.send(result[0]);
             }
         });
     }

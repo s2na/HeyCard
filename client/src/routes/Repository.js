@@ -64,18 +64,18 @@ function getContents(repositoken, reposimail){
   .then(response => {
     //console.log(repositoken);
     //console.log(reposimail);
-    //console.log('Repoist Select Success:', JSON.stringify(response))
-    //return JSON.stringify(response);
-    console.log(response);
-    console.log(response.data);
-    return response;
+    console.log('Repoist Select Success:', JSON.stringify(response))
+    return JSON.stringify(response);
+    
+    //console.log(response);
+    //console.log(response.data);
+    //return response;
   })
 }
 
 
 function Repository({ usertoken, usermail }) {
-  //const [data, setData] = useState([]);
-  const [data, setData] = useState([]);;
+  const [data, setData] = useState([]);
   const { repositoken } = usertoken || {}; // App.js에서 token값 가져오기
   const { reposimail } = usermail || {}; // App.js에서 logmail값 가져오기
   const [searchdata, setSearchdata] = useState("");
@@ -88,8 +88,11 @@ function Repository({ usertoken, usermail }) {
     async function get() {
       const result = getContents(usertoken.token, usermail.logmail);
       if (!completed) {
-        setData(result.data);
-        console.log(result.data);
+        //setData(result.data);
+        //console.log(result.data);
+        
+        setData(result);
+
       }
     }
     get();
