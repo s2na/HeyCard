@@ -60,15 +60,15 @@ function Repository({ usertoken, usermail }) {
 
     async function get() {
       //const result = await axios.post("/api/contents/manageCard/select");
-      const result = await fetch('/api/contents/manageCard/select', {
+      const result = await axios.post('/api/contents/manageCard/select', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
+        data: {
             token: usertoken.token,
             userEmail: usermail.logmail,
-        })
+        }
       });
 
       if (!completed) {
