@@ -126,7 +126,7 @@ router.post('/select', (req, res) => {
 });
 */
 
-router.get('/select', (req, res) => {
+router.post('/select', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
         db_config.connect(mysqlCon);
