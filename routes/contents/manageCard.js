@@ -132,8 +132,6 @@ router.get('/select', (req, res) => {
         db_config.connect(mysqlCon);
 
         res.header("Access-Control-Allow-Origin", "*");
-        console.log("요청받은 유저 이메일 : " + req.body.userEmail);
-
         let sql = `SELECT * FROM contents;`
         mysqlCon.query(sql, function(err, result) {
             if(err) {
