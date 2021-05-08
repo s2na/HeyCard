@@ -59,7 +59,18 @@ function Repository({ usertoken, usermail }) {
     let completed = false; //초기에는 실행해야 되기때문에 false flag 변수
 
     async function get() {
-      const result = await axios.post("/api/contents/manageCard/select");
+      //const result = await axios.post("/api/contents/manageCard/select");
+      const result = await fetch('/api/contents/manageCard/select', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: usertoken,
+            userEmail: usermail,
+        })
+      });
+
       if (!completed) {
         //console.log(result);
         //console.log(result.data);

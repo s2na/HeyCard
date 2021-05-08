@@ -84,6 +84,34 @@ router.post('/select', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
         db_config.connect(mysqlCon);
+        console.log("select token : " + req.body.token);
+        console.log("select userEmail : " + req.body.userEmail);
+
+        res.header("Access-Control-Allow-Origin", "*");
+        let sql = `SELECT * FROM contents WHERE userEmail = ?;`
+        let params = [
+            req.body.userEmail
+        ]
+        mysqlCon.query(sql, function(err, result) {
+            if(err) {
+                console.log('query is not excuted. select fail...\n' + err);
+                resultToJson = JSON.stringify('N');
+                console.log(resultToJson);
+                res.send(resultToJson);
+            } else{
+                resultToJson = JSON.stringify(result);
+                console.log(resultToJson);
+                res.send(resultToJson);
+                //res.send(result[0]);
+            }
+        });
+    }
+});
+/*
+router.post('/select', (req, res) => {
+    if(!req.secure){
+        const mysqlCon = db_config.init();
+        db_config.connect(mysqlCon);
 
         res.header("Access-Control-Allow-Origin", "*");
         let sql = `SELECT * FROM contents;`
@@ -102,6 +130,7 @@ router.post('/select', (req, res) => {
         });
     }
 });
+*/
 
 /*
 function getContents(){
