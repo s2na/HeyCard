@@ -65,8 +65,8 @@ function getContents(repositoken, reposimail){
     //console.log(repositoken);
     //console.log(reposimail);
     //console.log('Repoist Select Success:', JSON.stringify(response))
-    return JSON.stringify(response);
-
+    //return JSON.stringify(response);
+    return response;
   })
 }
 
@@ -85,8 +85,8 @@ function Repository({ usertoken, usermail }) {
     async function get() {
       const result = getContents(usertoken.token, usermail.logmail);
       if (!completed) {
-        setData(result);
-        console.log(result);
+        setData(result.data);
+        console.log(result.data);
       }
     }
     get();
