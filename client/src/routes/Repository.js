@@ -60,7 +60,11 @@ function Repository({ usertoken, usermail }) {
 
     async function get() {
       const result = await axios.get("/api/contents/manageCard/select");
-      if (!completed) setData(result.data);
+      if (!completed) {
+        console.log(result);
+        console.log(result.data);
+        setData(result.data);
+      }
     }
     get();
     return () => {
