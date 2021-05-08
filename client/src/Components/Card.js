@@ -42,7 +42,7 @@ function Card({
   address,
   color,
   corporate,
-  img,
+  image,
   introduce,
   logmail,
   mail,
@@ -52,14 +52,14 @@ function Card({
   title,
 }) {
   const [toggleon, setToggleon] = useState(false);
-  console.log(img);
+  console.log(image);
   const onClick = () => {
     setToggleon(!toggleon);
   };
 
   return (
     <Cardposition>
-      <Img src={img} width="250px" height="350px" />
+      <Img src={image} width="250px" height="350px" />
       <div className="card_data">
         <Cardtitle className="card_title">
           {title}
