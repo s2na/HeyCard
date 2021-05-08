@@ -52,7 +52,7 @@ function Card({
   title,
 }) {
   const [toggleon, setToggleon] = useState(false);
-
+  console.log(image);
   const onClick = () => {
     setToggleon(!toggleon);
   };
