@@ -11,17 +11,19 @@ function Navigation_User({user, logout, usertoken}) {
   };
 
   const handleClick = () => {
-    fetch('/api/auth/oauth/logout', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        token: usertoken.token,
-          //email: res.kakao_account.email,
+    async function get(access_token, email) {
+      const result = await fetch('/api/auth/oauth/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          token: usertoken.token,
+            //email: res.kakao_account.email,
+        })
       })
-    })
-
+    }
+    get(authObj.access_token, res.kakao_account.email);
     logout()
   }
 

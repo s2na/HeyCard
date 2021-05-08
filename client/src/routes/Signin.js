@@ -42,20 +42,6 @@ function Signin({ authenticated, login, gettoken, getusermail, location }) {
             })
             */
 
-            /*
-            async function get(access_token, email) {
-              const result = await axios.post('/api/auth/oauth/login', {
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                data: {
-                  token: access_token,
-                  email: email,
-                }
-              });
-            }
-            */
-
             async function get(access_token, email) {
               const result = await fetch('/api/auth/oauth/login', {
                 method: 'POST',
