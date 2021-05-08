@@ -42,10 +42,12 @@ function Signin({ authenticated, login, gettoken, getusermail, location }) {
             
            /*
              axios.post('/api/auth/oauth', {
-              headers: {'Content-Type': 'application/json'},
+              headers: {
+                'Content-Type': 'application/json'
+              },
               body: JSON.stringify({
                 token: authObj.access_token,
-                email: res.kakao_account.profile.nickname,
+                email: res.kakao_account.email,
               })
             
             });

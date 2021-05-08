@@ -116,7 +116,7 @@ function Repository({ usertoken, usermail }) {
               address={item.address}
               color={item.color}
               coporate={item.corporate}
-              image={item.image}
+              img={item.image}
               introduce={item.introduce}
               logmail={item.userEmail}
               mail={item.mail}
