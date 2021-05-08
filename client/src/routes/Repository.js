@@ -85,8 +85,8 @@ function Repository({ usertoken, usermail }) {
     async function get() {
       const result = getContents(usertoken.token, usermail.logmail);
       if (!completed) {
-        setData(result.data);
-        console.log(result.data);
+        setData(result);
+        console.log(result);
       }
     }
     get();
