@@ -50,7 +50,6 @@ function Card({
   officenumber,
   phonenumber,
   title,
-  token,
 }) {
   const [toggleon, setToggleon] = useState(false);
 

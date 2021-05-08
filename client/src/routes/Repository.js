@@ -142,7 +142,6 @@ function Repository({ usertoken, usermail }) {
               officenumber={item.officenumber}
               phonenumber={item.phonenumber}
               title={item.title}
-              token={item.token}
             />
           ))}
         </Outputlayer>
