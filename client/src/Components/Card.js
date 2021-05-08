@@ -30,12 +30,17 @@ const Togglebtn = styled.button`
 const Togglebox = styled.div`
   width: 100px;
   height: 70px;
-  background-color: beige;
+  background-color: #a259ff;
   position: absolute;
   top: 5px;
   left: 25px;
   display: flex;
   flex-direction: column;
+`;
+
+const Toggle__btn = styled.button`
+  background-color: #a259ff;
+  border-style: solid black;
 `;
 
 function Card({
@@ -50,9 +55,11 @@ function Card({
   officenumber,
   phonenumber,
   title,
+  token,
+  openModal,
 }) {
   const [toggleon, setToggleon] = useState(false);
-  console.log(image);
+
   const onClick = () => {
     setToggleon(!toggleon);
   };
@@ -111,9 +118,9 @@ function Card({
       </Togglebtn>
       {toggleon ? (
         <Togglebox>
-          <button>공유하기</button>
-          <button>수정하기</button>
-          <button>삭제하기</button>
+          <Toggle__btn>공유하기</Toggle__btn>
+          <Toggle__btn>수정하기</Toggle__btn>
+          <Toggle__btn onClick={openModal}>삭제하기</Toggle__btn>
         </Togglebox>
       ) : (
         <div />

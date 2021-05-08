@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Sidebar from "../Components/Sidebar";
-import Axios from "axios";
 import axios from "axios";
 import Card from "../Components/Card";
+import Modalrepository from "../Components/Modalrepository";
 
 //명함 만들기 main 화면
 const MakemainPositioner = styled.div`
@@ -52,7 +52,7 @@ function Repository({ usertoken, usermail }) {
   const [data, setData] = useState([]);
   const { repositoken } = usertoken || {}; // App.js에서 token값 가져오기
   const { reposimail } = usermail || {}; // App.js에서 logmail값 가져오기
-  const [searchdata, setSearchdata] = useState("");
+  const [searchdata, setSearchdata] = useState(""); //검색창 값(searchdata)
 
   useEffect(() => {
     // DB에 있는 모든 정보들을 호출하는 API가 컴포넌트 마운트 전에 실행
@@ -82,6 +82,13 @@ function Repository({ usertoken, usermail }) {
     setSearchdata(e.target.value);
   };
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = (e) => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <MakemainPositioner>
@@ -124,8 +131,13 @@ function Repository({ usertoken, usermail }) {
               officenumber={item.officenumber}
               phonenumber={item.phonenumber}
               title={item.title}
+              openModal={openModal}
             />
           ))}
+          <Modalrepository open={modalOpen} close={closeModal}>
+            {/* Modal.js <main> {props.children} </main>에 내용이 입력된다. */}
+            해당 명함을 정말 삭제하시겠어요?
+          </Modalrepository>
         </Outputlayer>
       </Outputform>
     </MakemainPositioner>

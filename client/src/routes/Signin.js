@@ -29,6 +29,7 @@ function Signin({ authenticated, login, gettoken, getusermail, location }) {
             //console.log(authObj.access_token);
             //console.log(res.kakao_account.email);
             
+            
             fetch('/api/auth/oauth/login', {
               method: 'POST',
               headers: {
@@ -40,18 +41,20 @@ function Signin({ authenticated, login, gettoken, getusermail, location }) {
               })
             })
             
-           /*
-             axios.post('/api/auth/oauth', {
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                token: authObj.access_token,
-                email: res.kakao_account.email,
-              })
+            async function get() {
+              const result = await axios.post('/api/auth/oauth', {
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                data: {
+                  token: authObj.access_token,
+                  email: res.kakao_account.email,
+                }
+              });
+            }
             
-            });
-            */
+            get();
+            
             setUsername(res.kakao_account.profile.nickname);
             setlogMail(res.kakao_account.email);
           }, // Kakao.API.request.success - end
