@@ -83,7 +83,7 @@ function Repository({ usertoken, usermail }) {
     console.log(usertoken);
     console.log(usermail);
     async function get() {
-      const result = getContents(repositoken, reposimail);
+      const result = getContents(usertoken, usermail);
       if (!completed) setData(result.data);
     }
     get();
