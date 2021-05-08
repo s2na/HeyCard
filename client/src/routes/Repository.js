@@ -66,8 +66,8 @@ function Repository({ usertoken, usermail }) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            token: usertoken,
-            userEmail: usermail,
+            token: usertoken.token,
+            userEmail: usermail.email,
         })
       });
 
