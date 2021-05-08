@@ -58,7 +58,7 @@ function Repository({ usertoken, usermail }) {
     // DB에 있는 모든 정보들을 호출하는 API가 컴포넌트 마운트 전에 실행
     let completed = false; //초기에는 실행해야 되기때문에 false flag 변수
 
-    async function get(token, userEmail) {
+    async function get() {
       //const result = await axios.post("/api/contents/manageCard/select");
       const result = await axios.post('/api/contents/manageCard/select', {
         method: 'POST',
@@ -66,8 +66,8 @@ function Repository({ usertoken, usermail }) {
             'Content-Type': 'application/json',
         },
         data: {
-            token: token,
-            userEmail: userEmail,
+            token: usertoken.token,
+            userEmail: usermail.logmail,
         }
       });
 
@@ -78,7 +78,7 @@ function Repository({ usertoken, usermail }) {
         setData(JSON.parse(JSON.stringify(result)).data);
       }
     }
-    get(usertoken.token, usermail.logmail);
+    get();
     return () => {
       completed = true;
     };
