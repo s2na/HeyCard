@@ -90,9 +90,9 @@ function Repository({ usertoken, usermail }) {
       if (!completed) {
         //setData(result.data);
         //console.log(result.data);
-        console.log(JSON.parse(result));
+        //console.log(JSON.parse(result));
         console.log(JSON.parse(result)[0]);
-        setData(JSON.parse(result));
+        setData(JSON.parse(result)[0]);
 
       }
     }
