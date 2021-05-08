@@ -57,7 +57,7 @@ function Repository({ usertoken, usermail }) {
   useEffect(() => {
     // DB에 있는 모든 정보들을 호출하는 API가 컴포넌트 마운트 전에 실행
     let completed = false; //초기에는 실행해야 되기때문에 false flag 변수
-
+    console.log(usermail);
     async function get() {
       //const result = await axios.post("/api/contents/manageCard/select");
       const result = await fetch('/api/contents/manageCard/select', {
