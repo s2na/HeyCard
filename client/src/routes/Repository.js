@@ -62,6 +62,8 @@ function getContents(repositoken, reposimail){
   })
   .then(res => res.json())
   .then(response => {
+    console.log(repositoken);
+    console.log(reposimail);
     console.log('Repoist Select Success:', JSON.stringify(response))
     return JSON.stringify(response);
 

@@ -102,7 +102,7 @@ router.post('/select', (req, res) => {
 
         res.header("Access-Control-Allow-Origin", "*");
         const userEmail = req.body.userEmail;
-        console.log("요청받은 유저 이메일 : " + userEmail);
+        console.log("요청받은 유저 이메일 : " + req.body.userEmail);
 
         let sql = `SELECT * FROM contents WHERE userEmail = ?;`
         let params = [req.body.userEmail]
