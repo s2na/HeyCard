@@ -43,19 +43,19 @@ function Signin({ authenticated, login, gettoken, getusermail, location }) {
             */
 
 
-            async function get() {
+            async function get(access_token, email) {
               const result = await axios.post('/api/auth/oauth/login', {
                 headers: {
                   'Content-Type': 'application/json'
                 },
                 data: {
-                  token: authObj.access_token,
-                  email: res.kakao_account.email,
+                  token: access_token,
+                  email: email,
                 }
               });
             }
             
-            get();
+            get(authObj.access_token, res.kakao_account.email);
 
             setUsername(res.kakao_account.profile.nickname);
             setlogMail(res.kakao_account.email);
