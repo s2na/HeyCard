@@ -13,37 +13,26 @@ function Signin({ authenticated, login, gettoken, getusermail, location }) {
   const [logmail, setlogMail] = useState("");
   // 카카오 로그인 api에서 사용자 정보 중 nickname만 setUsername으로 빼내서 state 관리
   const kakaoLoginClickHandler = () => {
-    //카카오 로그인 api
-    Kakao.Auth.login({
-      scope: "profile, account_email, gender",
-      success: function (authObj) {
-        //토큰
-        setToken(authObj.access_token);
-        
-        //console.log(authenticated);
-        Kakao.API.request({
-          url: "/v2/user/me",
-          success: (res) => {
-            // res.kakao_account (사용자 정보)
 
-            //console.log(authObj.access_token);
-            //console.log(res.kakao_account.email);
-            
-            /*
-            fetch('/api/auth/oauth/login', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                  token: authObj.access_token,
-                  email: res.kakao_account.email,
-              })
-            })
-            */
+    async function get() {
+      //카카오 로그인 api
+      Kakao.Auth.login({
+        scope: "profile, account_email, gender",
+        success: function (authObj) {
+          //토큰
+          setToken(authObj.access_token);
+          
+          //console.log(authenticated);
+          Kakao.API.request({
+            url: "/v2/user/me",
+            success: (res) => {
+              // res.kakao_account (사용자 정보)
 
-            async function get(access_token, email) {
-              const result = await fetch('/api/auth/oauth/login', {
+              //console.log(authObj.access_token);
+              //console.log(res.kakao_account.email);
+              
+              /*
+              fetch('/api/auth/oauth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -53,14 +42,43 @@ function Signin({ authenticated, login, gettoken, getusermail, location }) {
                     email: res.kakao_account.email,
                 })
               })
-            }
-            get(authObj.access_token, res.kakao_account.email);
-            setUsername(res.kakao_account.profile.nickname);
-            setlogMail(res.kakao_account.email);
-          }, // Kakao.API.request.success - end
-        }); // Kakao.API.request - end
-      }, // Kakao.Auth.login.success - end
-    }); // Kakao.Auth.login - end
+              */
+              
+              /*
+              async function get(access_token, email) {
+                const result = await fetch('/api/auth/oauth/login', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                      token: authObj.access_token,
+                      email: res.kakao_account.email,
+                  })
+                })
+              }
+              get(authObj.access_token, res.kakao_account.email);
+              */
+
+              fetch('/api/auth/oauth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    token: authObj.access_token,
+                    email: res.kakao_account.email,
+                })
+              })
+
+              setUsername(res.kakao_account.profile.nickname);
+              setlogMail(res.kakao_account.email);
+            }, // Kakao.API.request.success - end
+          }); // Kakao.API.request - end
+        }, // Kakao.Auth.login.success - end
+      }); // Kakao.Auth.login - end
+    }
+    get();
   }; // kakaoLoginClickHandler - end (카카오 로그인 api - end)
   useEffect(() => {
     //username state의 값이 변하게 되면 login({username})을 실행
