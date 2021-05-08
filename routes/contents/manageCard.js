@@ -92,7 +92,7 @@ router.post('/select', (req, res) => {
         let params = [
             req.body.userEmail
         ]
-        mysqlCon.query(sql, function(err, result) {
+        mysqlCon.query(sql, params, function(err) {
             if(err) {
                 console.log('query is not excuted. select fail...\n' + err);
                 resultToJson = JSON.stringify('N');
