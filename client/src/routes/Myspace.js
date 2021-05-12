@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Sidebar from "../Components/Sidebar";
-import Axios from "axios";
 import domtoimage from "dom-to-image";
-import FileSaver, { saveAs } from "file-saver";
 import Modal from "../Components/Modal";
+import axios from "axios";
 
 //명함 만들기 main 화면
 const MakemainPositioner = styled.div`
@@ -178,7 +177,8 @@ const Submitbtn = styled.button`
 function Myspace({ usertoken, usermail }) {
   const { token } = usertoken || {}; // App.js에서 token값 가져오기
   const { logmail } = usermail || {}; // App.js에서 logmail값 가져오기
-
+  const [duplicated, setDuplicated] = useState(true);
+  //명함이름 중복체크 후 중복되지 않으면 true, 중복된다면 false
   const [values, setValues] = useState({
     token: token,
     userEmail: logmail,
@@ -215,7 +215,6 @@ function Myspace({ usertoken, usermail }) {
   };
 
   const handleChange = (e) => {
-    // Basicinfo input eventhandle function
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
@@ -224,6 +223,31 @@ function Myspace({ usertoken, usermail }) {
     // Colorselect button eventhandle function
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
+  };
+
+  const handleChangeduplicated = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+
+    async function duplicatedcheck() {
+      //중복체크 API 호출
+      const result = await axios({
+        method: "POST",
+        url: "/api/contents/manageCard/titleCheck",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          usermail: values.mail,
+          title: values.title,
+        },
+      });
+      if (result === 1) {
+        //명함이름이 중복되면 result가 1이기에
+        setDuplicated(false); //duplicated변수는 명함이름이 중복되면 false를 가진다.
+      }
+    }
+    duplicatedcheck();
   };
 
   console.log(values);
@@ -358,9 +382,14 @@ function Myspace({ usertoken, usermail }) {
               <input
                 name="title"
                 value={values.title}
-                onChange={handleChange}
+                onChange={handleChangeduplicated}
                 placeholder="명함 이름을 입력하세요"
               ></input>
+              {duplicated ? (
+                <label>사용가능한 이름입니다.</label> //duplicated의 값이 true이면 실행
+              ) : (
+                <label>중복됩니다.</label> //duplicated의 값이 false면 실행
+              )}
             </Modal>
           </Submitbutposition>
         </Infoinputs>

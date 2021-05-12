@@ -1,5 +1,7 @@
+import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
+import Modalrepository from "./Modalrepository";
 
 const Cardposition = styled.div`
   width: 250px;
@@ -56,12 +58,36 @@ function Card({
   phonenumber,
   title,
   token,
-  openModal,
 }) {
   const [toggleon, setToggleon] = useState(false);
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = (e) => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   const onClick = () => {
     setToggleon(!toggleon);
+  };
+
+  const deleteCard = () => {
+    // => 명함제목, userEmail, token
+    const result = axios({
+      method: "POST",
+      url: "/api/contents/manageCard/delete",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        token: token,
+        userEmail: logmail,
+        title: title,
+      },
+    });
+    console.log(result); //왜 아무 반응도 없노....
   };
 
   return (
@@ -125,6 +151,13 @@ function Card({
       ) : (
         <div />
       )}
+      <Modalrepository
+        open={modalOpen}
+        close={closeModal}
+        deleteApi={deleteCard}
+      >
+        해당 명함을 정말 삭제하시겠어요?
+      </Modalrepository>
     </Cardposition>
   );
 }

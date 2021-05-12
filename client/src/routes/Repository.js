@@ -94,14 +94,6 @@ function Repository({ usertoken, usermail }) {
     setSearchdata(e.target.value);
   };
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const openModal = (e) => {
-    setModalOpen(true);
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
   return (
     <MakemainPositioner>
       <Sidebar />
@@ -143,13 +135,8 @@ function Repository({ usertoken, usermail }) {
               officenumber={item.officenumber}
               phonenumber={item.phonenumber}
               title={item.title}
-              openModal={openModal}
             />
           ))}
-          <Modalrepository open={modalOpen} close={closeModal}>
-            {/* Modal.js <main> {props.children} </main>에 내용이 입력된다. */}
-            해당 명함을 정말 삭제하시겠어요?
-          </Modalrepository>
         </Outputlayer>
       </Outputform>
     </MakemainPositioner>
