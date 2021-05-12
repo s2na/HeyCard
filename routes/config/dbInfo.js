@@ -18,6 +18,10 @@ module.exports = {
         return mysql.createConnection(db_info);     // 'createConnection()'에는 DB에 대한 정보(db_info)를 매개변수로 넣어주어야 한다.
     },
     connect: function(conn) {
+
+    }
+    /*
+    connect: function(conn) {
         conn.connect(function(err) {            
             if(err) {                            
                 console.log('error when connecting to db:', err);
@@ -34,4 +38,5 @@ module.exports = {
             }
         });
     }
+    */
 }

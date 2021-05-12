@@ -76,7 +76,7 @@ router.post('/insert', (req, res) => {
                 res.send(resultToJson);
             }
         });
-        mysqlCon.release();
+        //mysqlCon.release();
     }
 });
 
@@ -106,7 +106,7 @@ router.post('/select', (req, res) => {
                 //res.send(result[0]);
             }
         });
-        mysqlCon.release();
+        //mysqlCon.release();
     }
 });
 /*
@@ -214,7 +214,7 @@ router.post('/update', (req, res) => {
                 res.send(resultToJson);
             }
         });
-        mysqlCon.release();
+        //mysqlCon.release();
     }
 });
 
@@ -242,7 +242,7 @@ router.post('/delete', (req, res) => {
                 res.send(resultToJson);
             }
         });
-        mysqlCon.release();
+        //mysqlCon.release();
     }
 });
 
@@ -266,7 +266,7 @@ router.post('/titleCheck', (req, res) => {
                 res.send(resultToJson);
             }
         });
-        mysqlCon.release();
+        //mysqlCon.release();
     }
 });
 
