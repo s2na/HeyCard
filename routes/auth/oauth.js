@@ -42,8 +42,8 @@ router.post('/login', (req, res) => {    //POST 메서드 / data 주소의 요�
         mysqlCon.query(sql, params, function(err) {
             if(err) console.log('query is not excuted. insert fail...\n' + err);
             //else res.redirect('/list');
-            mysqlCon.release();
         });
+        mysqlCon.release();
     }else{
         next();
     }
@@ -64,8 +64,8 @@ router.post('/logout', (req, res) => {    //POST 메서드 / data 주소의 요�
         mysqlCon.query(sql, params, function(err) {
             if(err) console.log('query is not excuted. delete fail...\n' + err);
             //else res.redirect('/list');
-            mysqlCon.release();
         });
+        mysqlCon.release();
     }else{
         next();
     }
