@@ -40,13 +40,18 @@ router.post('/login', (req, res) => {    //POST 메서드 / data 주소의 요�
         var params = [req.body.token, 'test', req.body.email];
         //var params = [req.body.authObj.access_token, req.body.authObj.refresh_token]
         mysqlCon.query(sql, params, function(err) {
-            if(err) console.log('query is not excuted. insert fail...\n' + err);
-            //else res.redirect('/list');
+            if(err) {
+                resultToJson = JSON.stringify('N');
+                console.log(resultToJson);
+                res.send(resultToJson);
+            } else{
+                resultToJson = JSON.stringify('Y');
+                console.log(resultToJson);
+                res.send(resultToJson);
+            }
         });
         db_config.end(mysqlCon);
         //mysqlCon.release();
-    }else{
-        next();
     }
 });
 
@@ -63,13 +68,18 @@ router.post('/logout', (req, res) => {    //POST 메서드 / data 주소의 요�
         var params = [req.body.token];
         //var params = [req.body.token, req.body.email];
         mysqlCon.query(sql, params, function(err) {
-            if(err) console.log('query is not excuted. delete fail...\n' + err);
-            //else res.redirect('/list');
+            if(err) {
+                resultToJson = JSON.stringify('N');
+                console.log(resultToJson);
+                res.send(resultToJson);
+            } else{
+                resultToJson = JSON.stringify('Y');
+                console.log(resultToJson);
+                res.send(resultToJson);
+            }
         });
         db_config.end(mysqlCon);
         //mysqlCon.release();
-    }else{
-        next();
     }
 });
 
