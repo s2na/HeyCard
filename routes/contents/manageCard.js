@@ -255,7 +255,7 @@ router.post('/titleCheck', (req, res) => {
         db_config.connect(mysqlCon);
 
         let sql = `SELECT COUNT(1) AS cnt FROM contents WHERE userEmail = ? AND title = ?;`   
-        let params = [req.body.email, req.body.title]
+        let params = [req.body.userEmail, req.body.title]
         mysqlCon.query(sql, params, function(err, result) {
             if(err) {
                 console.log('query is not excuted. select fail...\n' + err);

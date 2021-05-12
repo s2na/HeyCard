@@ -238,7 +238,7 @@ function Myspace({ usertoken, usermail }) {
           "Content-Type": "application/json",
         },
         data: {
-          usermail: values.mail,
+          userEmail: values.mail,
           title: values.title,
         },
       });
