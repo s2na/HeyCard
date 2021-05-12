@@ -239,13 +239,18 @@ function Myspace({ usertoken, usermail }) {
         },
         data: {
           userEmail: values.mail,
-          title: values.title,
-        },
+          token: values.token,
+        }
       });
+      console.log(JSON.parse(JSON.stringify(result)));
+      setData(JSON.parse(JSON.stringify(result)).data);
+      
+      /*
       if (result === 1) {
         //명함이름이 중복되면 result가 1이기에
         setDuplicated(false); //duplicated변수는 명함이름이 중복되면 false를 가진다.
       }
+      */
     }
     duplicatedcheck();
   };

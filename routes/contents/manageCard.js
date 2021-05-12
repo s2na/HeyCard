@@ -100,7 +100,8 @@ router.post('/select', (req, res) => {
                 res.send(resultToJson);
             } else{
                 resultToJson = JSON.stringify(result);
-                console.log(resultToJson);
+                //console.log(resultToJson);
+                console.log('Success Select Cards');
                 res.send(resultToJson);
                 //res.send(result[0]);
             }
@@ -254,6 +255,32 @@ router.post('/titleCheck', (req, res) => {
         const mysqlCon = db_config.init();
         db_config.connect(mysqlCon);
 
+        let sql = `SELECT title FROM contents WHERE userEmail = ?;`   
+        let params = [req.body.userEmail]
+        mysqlCon.query(sql, params, function(err, result) {
+            if(err) {
+                console.log('query is not excuted. select fail...\n' + err);
+                resultToJson = JSON.stringify('N');
+                console.log(resultToJson);
+                res.send(resultToJson);
+            } else{
+                resultToJson = JSON.stringify(result);
+                //console.log(resultToJson);
+                console.log('Success Select Titles');
+                res.send(resultToJson);
+                //res.send(result[0]);
+            }
+        });
+        db_config.end(mysqlCon);
+        //mysqlCon.release();
+    }
+});
+/*
+router.post('/titleCheck', (req, res) => {
+    if(!req.secure){
+        const mysqlCon = db_config.init();
+        db_config.connect(mysqlCon);
+
         let sql = `SELECT COUNT(1) AS cnt FROM contents WHERE userEmail = ? AND title = ?;`   
         let params = [req.body.userEmail, req.body.title]
         mysqlCon.query(sql, params, function(err, result) {
@@ -272,5 +299,5 @@ router.post('/titleCheck', (req, res) => {
         //mysqlCon.release();
     }
 });
-
+*/
 module.exports = router;
