@@ -7,9 +7,7 @@ const express = require('express');
 const cors = require('cors');
 const router = express.Router();
 const db_config = require('../config/dbInfo.js');
-const mysqlCon = db_config.init();
-
-db_config.connect(mysqlCon);
+//const mysqlCon = db_config.init();
 
 router.use(cors());
 router.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded

@@ -13,14 +13,11 @@ let db_info = {
     database: 'heroku_a6d2ea31e650b20'         // 사용할 데이터베이스의 이름
 }
 
+
 module.exports = {
     init: function () {     // DB와 서버간의 연결 객체를 반환하는 'init()' 함수
         return mysql.createConnection(db_info);     // 'createConnection()'에는 DB에 대한 정보(db_info)를 매개변수로 넣어주어야 한다.
     },
-    connect: function(conn) {
-
-    }
-    /*
     connect: function(conn) {
         conn.connect(function(err) {            
             if(err) {                            
@@ -37,6 +34,13 @@ module.exports = {
                 throw err;                              
             }
         });
+    },
+    end: function(conn) {
+        conn.end(function(err) {
+            if(err) {                            
+                console.log('error when connecting to db:', err);
+                setTimeout(handleDisconnect, 2000); 
+            }
+        });
     }
-    */
 }
