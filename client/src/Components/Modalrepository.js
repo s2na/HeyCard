@@ -18,7 +18,6 @@ const Modalrepository = (props) => {
           </header>
           <main>{props.children}</main>
           <footer>
-          <button className="close">삭제</button>
             <button className="close" onClick={deleteCard}>
               삭제
             </button>
