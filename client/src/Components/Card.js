@@ -75,6 +75,26 @@ function Card({
 
   const deleteCard = () => {
     // => 명함제목, userEmail, token
+    async function get() {
+      const result = await axios({
+        method: 'POST',
+        url: "/api/contents/manageCard/delete",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: {
+          token: token,
+          userEmail: logmail,
+          title: title,
+        }
+      });
+      console.log(JSON.parse(JSON.stringify(result)));
+    }
+    
+    get();
+    /*
+    console.log(logmail);
+    console.log(title);
     const result = axios({
       method: "POST",
       url: "/api/contents/manageCard/delete",
@@ -88,6 +108,7 @@ function Card({
       },
     });
     console.log(result); //왜 아무 반응도 없노....
+    */
   };
 
   return (
