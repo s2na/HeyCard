@@ -223,7 +223,8 @@ function Myspace({ usertoken, usermail }) {
   const handleChangeduplicated = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
-
+    console.log(values.mail);
+    console.log(values.title);
     async function duplicatedcheck() {
       //중복체크 API 호출
       const result = await axios({
@@ -233,7 +234,7 @@ function Myspace({ usertoken, usermail }) {
           "Content-Type": "application/json",
         },
         data: {
-          userEmail: values.mail,
+          userEmail: values.userEmail,
           title: values.title,
         },
       });
