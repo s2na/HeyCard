@@ -196,6 +196,7 @@ function Myspace({ usertoken, usermail }) {
   });
 
   const [modalOpen, setModalOpen] = useState(false);
+  const titleBoolean = 'N';
   const openModal = (e) => {
     setModalOpen(true);
     const { name } = e.target;
@@ -239,19 +240,21 @@ function Myspace({ usertoken, usermail }) {
         },
         data: {
           userEmail: values.mail,
-          token: values.token,
-        }
+          title: values.title,
+        },
       });
-      console.log(JSON.parse(JSON.stringify(result)));
-      
-      /*
       if (result === 1) {
         //명함이름이 중복되면 result가 1이기에
         setDuplicated(false); //duplicated변수는 명함이름이 중복되면 false를 가진다.
       }
-      */
     }
     duplicatedcheck();
+  };
+
+  const handleClick = (e) => {
+    // Colorselect button eventhandle function
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
   };
 
   console.log(values);
@@ -380,7 +383,7 @@ function Myspace({ usertoken, usermail }) {
               저장
             </Submitbtn>
             {/* header 부분에 텍스트를 입력한다. */}
-            <Modal open={modalOpen} close={closeModal} values={values}>
+            <Modal open={modalOpen} close={closeModal} values={values} >
               {/* Modal.js <main> {props.children} </main>에 내용이 입력된다. */}
               명함 이름을 지어주세요
               <input

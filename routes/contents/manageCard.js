@@ -249,13 +249,14 @@ router.post('/delete', (req, res) => {
     }
 });
 
+/*
 //명함 제목 중복 체크(명함만들기) -> /api/contents/manageCard/titleCheck
 router.post('/titleCheck', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
         db_config.connect(mysqlCon);
 
-        let sql = `SELECT title FROM contents WHERE userEmail = ?;`   
+        let sql = `SELECT count(1) AS count FROM contents WHERE userEmail = ?;`   
         let params = [req.body.userEmail]
         mysqlCon.query(sql, params, function(err, result) {
             if(err) {
@@ -275,7 +276,8 @@ router.post('/titleCheck', (req, res) => {
         //mysqlCon.release();
     }
 });
-/*
+*/
+
 router.post('/titleCheck', (req, res) => {
     if(!req.secure){
         const mysqlCon = db_config.init();
@@ -299,5 +301,5 @@ router.post('/titleCheck', (req, res) => {
         //mysqlCon.release();
     }
 });
-*/
+
 module.exports = router;
