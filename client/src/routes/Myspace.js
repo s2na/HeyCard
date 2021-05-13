@@ -238,7 +238,7 @@ function Myspace({ usertoken, usermail }) {
           title: values.title,
         },
       });
-      if (result === 1) {
+      if (result >= 1) {
         //명함이름이 중복되면 result가 1이기에
         setDuplicated(false); //duplicated변수는 명함이름이 중복되면 false를 가진다.
       }
