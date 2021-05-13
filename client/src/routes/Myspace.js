@@ -243,7 +243,6 @@ function Myspace({ usertoken, usermail }) {
         }
       });
       console.log(JSON.parse(JSON.stringify(result)));
-      setData(JSON.parse(JSON.stringify(result)).data);
       
       /*
       if (result === 1) {
