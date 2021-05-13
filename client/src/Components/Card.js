@@ -76,22 +76,22 @@ function Card({
   const deleteCard = () => {
     // => 명함제목, userEmail, token
     async function get() {
-      const result = await axios({
-        method: 'POST',
-        url: "/api/contents/manageCard/delete",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        data: {
-          token: token,
-          userEmail: logmail,
-          title: title,
-        }
-      });
-      console.log(JSON.parse(JSON.stringify(result)));
-    }
-    
-    get();
+        const result = await axios({
+          method: 'POST',
+          url: "/api/contents/manageCard/delete",
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          data: {
+            token: token,
+            userEmail: logmail,
+            title: title,
+          }
+        });
+        console.log(JSON.parse(JSON.stringify(result)));
+      }
+      get();
+    };
     /*
     console.log(logmail);
     console.log(title);
@@ -108,9 +108,9 @@ function Card({
       },
     });
     console.log(result); //왜 아무 반응도 없노....
-    */
+    
   };
-
+*/
   return (
     <Cardposition>
       <Img src={image} width="250px" height="350px" />
@@ -175,7 +175,7 @@ function Card({
       <Modalrepository
         open={modalOpen}
         close={closeModal}
-        deleteApi={deleteCard}
+        deleteCard={deleteCard}
       >
         해당 명함을 정말 삭제하시겠어요?
       </Modalrepository>

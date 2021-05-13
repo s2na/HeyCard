@@ -1,28 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Axios from "axios";
+import axios from "axios";
 import "./Modal.css";
 
 const Modalrepository = (props) => {
   const { open, close, deleteCard } = props;
-  const deleteClickHandler = () => {
-    // => 명함제목, userEmail, token
-    async function get() {
-      const result = await axios({
-        method: 'POST',
-        url: "/api/contents/manageCard/delete",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        data: {
-          token: token,
-          userEmail: logmail,
-          title: title,
-        }
-      });
-      console.log(JSON.parse(JSON.stringify(result)));
-    }
-    get();
-  };
 
   return (
     //모달이 열릴때 openModal클래스가 생성된다.
@@ -37,7 +18,7 @@ const Modalrepository = (props) => {
           </header>
           <main>{props.children}</main>
           <footer>
-            <button className="close" onClick={deleteClickHandler}>
+            <button className="close" onClick={deleteCard}>
               삭제
             </button>
             {/* 버튼에 삭제하기 api 추가하기 */}
