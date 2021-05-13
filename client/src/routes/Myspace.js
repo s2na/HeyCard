@@ -220,12 +220,6 @@ function Myspace({ usertoken, usermail }) {
     setValues({ ...values, [name]: value });
   };
 
-  const handleClick = (e) => {
-    // Colorselect button eventhandle function
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
-
   const handleChangeduplicated = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
