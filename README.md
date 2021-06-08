@@ -6,8 +6,10 @@
 FE Dev - Jaeho
 BE Dev - s2na
 
+# Team Notion
+https://www.notion.so/0b778becdc0b4a67a53916a62046d4ac
+
 # URL
 https://heycard.herokuapp.com/
 
-# Team Notion
-https://www.notion.so/0b778becdc0b4a67a53916a62046d4ac
+![image](https://user-images.githubusercontent.com/59468535/121187415-ff650600-c8a2-11eb-8618-4e1d2a303f4b.png)
